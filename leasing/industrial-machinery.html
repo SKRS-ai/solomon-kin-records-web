@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Heavy Industrial Machinery Rental & Leasing — Solomon Kin LLC</title>
+    <style>
+        /* Base Reset & Variables */
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; }
+        :root { --primary-dark: #111111; --secondary-gray: #444444; --light-gray: #f5f5f5; --border-color: #dddddd; --pure-white: #ffffff; }
+        body { background-color: var(--pure-white); color: var(--primary-dark); line-height: 1.6; }
+        a { text-decoration: none; color: inherit; }
+
+        /* Typography */
+        h1, h2, h3, h4 { font-weight: 700; color: var(--primary-dark); letter-spacing: -0.02em; }
+
+        /* Navigation Header */
+        header { width: 100%; border-bottom: 1px solid var(--border-color); background: var(--pure-white); position: sticky; top: 0; z-index: 1000; }
+        .nav-container { max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; padding: 1rem 2rem; }
+        .logo { font-size: 1.35rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.05em; }
+        .logo span { font-weight: 400; color: var(--secondary-gray); font-size: 0.9rem; text-transform: none; }
+        
+        /* Dropdown Menu Mechanics */
+        .nav-menu { display: flex; list-style: none; }
+        .nav-item { position: relative; padding: 0.5rem 1rem; }
+        .nav-link { font-size: 0.95rem; font-weight: 600; color: var(--secondary-gray); cursor: pointer; transition: color 0.2s; }
+        .nav-link:hover { color: var(--primary-dark); }
+        .nav-item:hover .dropdown-menu { display: block; opacity: 1; visibility: visible; }
+        
+        .dropdown-menu { 
+            display: none; position: absolute; top: 100%; left: 0; background: var(--pure-white); 
+            border: 1px solid var(--border-color); box-shadow: 0 4px 12px rgba(0,0,0,0.05); 
+            list-style: none; min-width: 280px; padding: 0.5rem 0; margin-top: 0.5rem; border-radius: 4px;
+        }
+        .dropdown-menu li a { display: block; padding: 0.6rem 1.2rem; font-size: 0.9rem; color: var(--secondary-gray); font-weight: 500; }
+        .dropdown-menu li a:hover { background-color: var(--light-gray); color: var(--primary-dark); }
+
+        /* Hero Layout */
+        .leasing-hero { max-width: 1200px; margin: 0 auto; padding: 5rem 2rem 3rem; border-bottom: 1px solid var(--border-color); }
+        .leasing-hero h1 { font-size: 3rem; line-height: 1.15; margin-bottom: 1.5rem; }
+        .leasing-hero p { font-size: 1.2rem; color: var(--secondary-gray); max-width: 850px; }
+
+        .content-container { max-width: 1200px; margin: 5rem auto; padding: 0 2rem; display: grid; grid-template-columns: 2fr 1fr; gap: 4rem; }
+        
+        /* Inventory Layout */
+        .main-content h2 { font-size: 1.8rem; margin-bottom: 1.5rem; }
+        .main-content p { font-size: 1.05rem; color: var(--secondary-gray); margin-bottom: 2.5rem; }
+        
+        .fleet-category { margin-bottom: 3.5rem; }
+        .fleet-category h3 { font-size: 1.4rem; margin-bottom: 1rem; border-bottom: 2px solid var(--primary-dark); padding-bottom: 0.3rem; }
+        
+        .fleet-table { width: 100%; border-collapse: collapse; margin-bottom: 1.5rem; }
+        .fleet-table th, .fleet-table td { padding: 0.8rem; text-align: left; border-bottom: 1px solid var(--border-color); font-size: 0.95rem; }
+        .fleet-table th { background: var(--light-gray); font-weight: 700; color: var(--primary-dark); }
+        .fleet-table td strong { color: var(--primary-dark); }
+
+        /* Compliance Framework Notice */
+        .compliance-callout { background-color: var(--light-gray); border-left: 4px solid var(--primary-dark); padding: 2rem; border-radius: 4px; margin-top: 3rem; }
+        .compliance-callout h4 { font-size: 1.1rem; margin-bottom: 0.5rem; }
+        .compliance-callout p { font-size: 0.95rem; color: var(--secondary-gray); margin-bottom: 0; }
+
+        /* Sidebar Elements */
+        .specs-sidebar { display: flex; flex-direction: column; gap: 2rem; }
+        .spec-box { border: 1px solid var(--border-color); padding: 2rem; border-radius: 4px; }
+        .spec-box h3 { font-size: 1rem; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 1rem; }
+        .spec-box ul { list-style: none; }
+        .spec-box ul li { font-size: 0.9rem; color: var(--secondary-gray); padding: 0.5rem 0; border-bottom: 1px solid var(--light-gray); }
+        .spec-box ul li strong { color: var(--primary-dark); }
+
+        /* Production Global Footer */
+        footer { background-color: var(--light-gray); border-top: 1px solid var(--border-color); padding: 4rem 2rem 2rem; font-size: 0.9rem; margin-top: 8rem; }
+        .footer-grid { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 2.5rem; }
+        .footer-col h4 { font-size: 1rem; margin-bottom: 1.2rem; text-transform: uppercase; letter-spacing: 0.05em; }
+        .footer-col a { display: block; color: var(--secondary-gray); margin-bottom: 0.6rem; font-size: 0.85rem; transition: color 0.2s; }
+        .footer-col a:hover { color: var(--primary-dark); }
+        
+        .footer-procurement-block { max-width: 1200px; margin: 3rem auto 0; padding-top: 2rem; border-top: 1px solid var(--border-color); color: var(--secondary-gray); }
+        .footer-procurement-block h4 { color: var(--primary-dark); font-size: 1rem; margin-bottom: 0.8rem; text-transform: uppercase; }
+        .footer-procurement-block p { font-size: 0.85rem; margin-bottom: 0.5rem; line-height: 1.5; }
+        
+        .footer-bottom { max-width: 1200px; margin: 2rem auto 0; padding-top: 1.5rem; border-top: 1px solid var(--border-color); display: flex; justify-content: space-between; flex-wrap: wrap; font-size: 0.8rem; color: var(--secondary-gray); }
+
+        @media (max-width: 992px) { .content-container { grid-template-columns: 1fr; gap: 3rem; } }
+        @media (max-width: 768px) {
+            .nav-container { flex-direction: column; gap: 1rem; text-align: center; }
+            .nav-menu { flex-wrap: wrap; justify-content: center; }
+            .leasing-hero h1 { font-size: 2.25rem; }
+            .dropdown-menu { position: static; box-shadow: none; border: none; padding-left: 1rem; display: block; opacity: 1; visibility: visible; }
+            .footer-bottom { flex-direction: column; gap: 1rem; text-align: center; }
+            .fleet-table { display: block; overflow-x: auto; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header / Navigation Menu Ecosystem -->
+    <header>
+        <nav class="nav-container">
+            <div class="logo">Solomon Kin LLC <br><span>via REALAiID.com</span></div>
+            <ul class="nav-menu">
+                <li class="nav-item"><a href="../index.html" class="nav-link">Home</a></li>
+                <li class="nav-item">
+                    <span class="nav-link">About Us ▾</span>
+                    <ul class="dropdown-menu">
+                        <li><a href="../about/profile.html">Corporate Profile & Personnel</a></li>
+                        <li><a href="../about/credentials.html">Certifications & Identifiers</a></li>
+                        <li><a href="../about/partnerships.html">Strategic Non-Profit Network</a></li>
+                    </ul>
+                </li>
+                <li class="nav-item">
+                    <span class="nav-link">Core Divisions ▾</span>
+                    <ul class="dropdown-menu">
+                        <li><a href="../solutions/identity-forensics.html">High-Assurance IDV & Forensics</a></li>
+                        <li><a href="../records-governance/employee-hr.html">Records Keeping & HR Information Systems</a></li>
+                        <li><a href="../solutions/behavioral-health.html">Forensic Behavioral Health Tech</a></li>
+                        <li><a href="../solutions/autonomous-transport.html">Transport Safety Analytics</a></li>
+                        <li><a href="../solutions/student-loans.html">Student Financial Counseling</a></li>
+                        <li><a href="../solutions/it-cybersecurity.html">IT Systems & Cybersecurity</a></li>
+                        <li><a href="../solutions/workforce-hr.html">Workforce Supply & Compliance</a></li>
+                    </ul>
+                </li>
+                <li class="nav-item">
+                    <span class="nav-link">Asset Leasing ▾</span>
+                    <ul class="dropdown-menu">
+                        <li><a href="industrial-machinery.html">Heavy Machinery Rental</a></li>
+                        <li><a href="tech-hardware.html">Technology Hardware Assets</a></li>
+                    </ul>
+                </li>
+                <li class="nav-item">
+                    <span class="nav-link">Procurement ▾</span>
+                    <ul class="dropdown-menu">
+                        <li><a href="../procurement/capability-statement.html">Capability Statement</a></li>
+                        <li><a href="../procurement/subcontracting.html">Subcontractor Portal Intake</a></li>
+                    </ul>
+                </li>
+                <li class="nav-item"><a href="../contact.html" class="nav-link">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Division Hero Block -->
+    <section class="leasing-hero">
+        <h1>Heavy Machinery & Industrial Equipment Leasing</h1>
+        <p>Providing compliant, commercial equipment leasing models built for large-scale municipal logistics, light civil construction projects, and fast field mobilizations.</p>
+    </section>
+
+    <!-- Main Inventory Framework -->
+    <main class="content-container">
+        
+        <!-- Left Column: Core Fleet Configurations -->
+        <div class="main-content">
+            <h2>Procurement-Compliant Asset Leasing</h2>
+            <p>Solomon Kin LLC offers a robust fleet management model engineered specifically for government agencies and prime contractors. Our leasing frameworks operate with complete audit transparency, allowing municipal departments to rapidly scale physical job site capabilities while keeping full tracking oversight.</p>
+            
+            <div class="fleet-category">
+                <h3>🏗️ Earthmoving & Job Site Machinery</h3>
+                <p>High-capacity machinery optimized for site clearing, excavation work, structural material transport, and regional infrastructure modernizations.</p>
+                <table class="fleet-table">
+                    <thead>
+                        <tr>
+                            <th style="width: 40%;">Equipment Class</th>
+                            <th style="width: 30%;">Capacity Scope</th>
+                            <th style="width: 30%;">Lease Availability</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Hydraulic Compact Excavators</strong></td>
+                            <td>3.5 to 8 Metric Tons</td>
+                            <td>Short / Long Term Short Notice</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Skid Steer & Track Loaders</strong></td>
+                            <td>Rated Operating Cap: 2k - 3.5k lbs</td>
+                            <td>Fulfillment Ready</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Backhoe Loaders</strong></td>
+                            <td>Dig Depth: 14' - 17'</td>
+                            <td>Contract Allocation Only</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="fleet-category">
+                <h3>📦 Material Handling & Industrial Logistics</h3>
+                <p>Industrial handling hardware built for warehouse supply loops, maritime terminal setups, and heavy payload staging fields.</p>
+                <table class="fleet-table">
+                    <thead>
+                        <tr>
+                            <th style="width: 40%;">Equipment Class</th>
+                            <th style="width: 30%;">Capacity Scope</th>
+                            <th style="width: 30%;">Lease Availability</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>High-Capacity Industrial Forklifts</strong></td>
+                            <td>5,000 to 15,000 lbs lift cap</td>
+                            <td>Fulfillment Ready</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Rough Terrain Telehandlers</strong></td>
+                            <td>Reach: 19' - 55' | Cap: Up to 10k lbs</td>
+                            <td>Contract Allocation Only</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Scissor & Articulating Boom Lifts</strong></td>
+                            <td>Working Height: 26' - 65'</td>
+                            <td>Short / Long Term</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Integrated Safety and Data Assurance Component -->
+            <div class="compliance-callout">
+                <h4>Systemic Identity & HR Compliance Security</h4>
+                <p>Unlike traditional equipment brokerages, Solomon Kin LLC bridges physical hardware deployment with deep technological security. All machine assets are logged within our **Enterprise Records Governance** network. Furthermore, when leasing equipment alongside our human capital pools, our **Workforce Supply** group guarantees that all field operators possess certified background checks, comprehensive training matrices, and complete labor rights tracking loops.</p>
+            </div>
+        </div>
+
+        <!-- Right Column: Contract Metadata Mapping -->
+        <aside class="specs-sidebar">
+            
+            <div class="spec-box">
+                <h3>Primary Procurement Codes</h3>
+                <ul>
+                    <li><strong>NAICS 532412:</strong> Construction Machinery Rental</li>
+                    <li><strong>NAICS 541611:</strong> Project Management Consulting</li>
+                    <li><strong>PSC W038:</strong> Lease/Rental of Construction Equipment</li>
+                </ul>
+            </div>
+
+            <div class="spec-box">
+                <h3>Leasing Parameters</h3>
+                <ul>
+                    <li><strong>Frameworks:</strong> Dry Lease (Equipment Only)</li>
+                    <li><strong>Audit Loop:</strong> Telematics Asset Tracking</li>
+                    <li><strong>Compliance:</strong> SAM.gov Registered Entity</li>
+                    <li><strong>Logistics Radius:</strong> Regional Hub Coverage</li>
+                </ul>
+            </div>
+
+        </aside>
+
+    </main>
+
+    <!-- Hard Procurement Global Data Footer -->
+    <footer>
+        <div class="footer-grid">
+            <div class="footer-col">
+                <h4>Corporate Profile</h4>
+                <a href="../about/profile.html">About Solomon Kin LLC</a>
+                <a href="../about/credentials.html">Certifications & Identifiers</a>
+                <a href="../about/partnerships.html">Strategic Non-Profit Network</a>
+            </div>
+            <div class="footer-col">
+                <h4>Operating Divisions</h4>
+                <a href="../solutions/identity-forensics.html">Identity Verification & Forensics</a>
+                <a href="../records-governance/employee-hr.html">Records Keeping & HRIS</a>
+                <a href="../solutions/behavioral-health.html">Forensic Behavioral Tech</a>
+                <a href="../solutions/autonomous-transport.html">Transport Safety Analytics</a>
+                <a href="../solutions/student-loans.html">Student Financial Counseling</a>
+                <a href="../solutions/it-cybersecurity.html">IT Systems & Cybersecurity</a>
+                <a href="../solutions/workforce-hr.html">Workforce Supply & Compliance</a>
+            </div>
+            <div class="footer-col">
+                <h4>Asset Leasing</h4>
+                <a href="industrial-machinery.html">Heavy Machinery Rental</a>
+                <a href="tech-hardware.html">Technology Hardware Assets</a>
+            </div>
+            <div class="footer-col">
+                <h4>Procurement & B2G</h4>
+                <a href="../procurement/capability-statement.html">View Capability Statement</a>
+                <a href="../procurement/subcontracting.html">Subcontractor Portal</a>
+                <a href="../contact.html">Submit B2G Inquiry</a>
+            </div>
+        </div>
+
+        <div class="footer-procurement-block">
+            <h4>Federal, State & Municipal Contracting Registrations</h4>
+            <p><strong>Legal Entity:</strong> Solomon Kin LLC (via REALAiID.com) &nbsp;|&nbsp; <strong>Principal Investigator / CTO:</strong> Nehemiah M. Brown</p>
+            <p><strong>Unique Entity ID (UEI):</strong> H8YDYLEK6283 &nbsp;|&nbsp; <strong>EIN:</strong> 82-4565975 &nbsp;|&nbsp; <strong>DUNS:</strong> 145053632 &nbsp;|&nbsp; <strong>SBC ID:</strong> SBC_002678850</p>
+            <p><strong>Primary NAICS Classification:</strong> 541512 (Computer Systems Design Services)</p>
+            <p><strong>Core Capabilities Mapped:</strong> Enterprise Records Governance | Human Resource Information Systems (HRIS) | Identity Trust Frameworks | Digital Forensics | Heavy Machinery Fleet Leasing</p>
+            <p><strong>System Status:</strong> Active on SAM.gov | Minority Business Enterprise (MBE) Status Verified | Regional Presence: Philadelphia, PA</p>
+        </div>
+
+        <div class="footer-bottom">
+            <p>&copy; 2026 Solomon Kin LLC. All Rights Reserved. Executive Directives executed via REALAiID.com.</p>
+            <div>
+                <a href="../privacy-policy.html">Privacy Policy</a>
+                <a href="../terms-of-service.html">Terms of Procurement</a>
+            </div>
+        </div>
+    </footer>
+
+</body>
+</html>
