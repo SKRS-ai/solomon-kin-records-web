@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>High-Assurance IDV & Digital Forensics — Solomon Kin LLC</title>
+    <style>
+        /* Base Reset & Variables */
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; }
+        :root { --primary-dark: #111111; --secondary-gray: #444444; --light-gray: #f5f5f5; --border-color: #dddddd; --pure-white: #ffffff; }
+        body { background-color: var(--pure-white); color: var(--primary-dark); line-height: 1.6; }
+        a { text-decoration: none; color: inherit; }
+
+        /* Typography */
+        h1, h2, h3, h4 { font-weight: 700; color: var(--primary-dark); letter-spacing: -0.02em; }
+
+        /* Navigation Header */
+        header { width: 100%; border-bottom: 1px solid var(--border-color); background: var(--pure-white); position: sticky; top: 0; z-index: 1000; }
+        .nav-container { max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; padding: 1rem 2rem; }
+        .logo { font-size: 1.35rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.05em; }
+        .logo span { font-weight: 400; color: var(--secondary-gray); font-size: 0.9rem; text-transform: none; }
+        
+        /* Dropdown Menu Mechanics */
+        .nav-menu { display: flex; list-style: none; }
+        .nav-item { position: relative; padding: 0.5rem 1rem; }
+        .nav-link { font-size: 0.95rem; font-weight: 600; color: var(--secondary-gray); cursor: pointer; transition: color 0.2s; }
+        .nav-link:hover { color: var(--primary-dark); }
+        .nav-item:hover .dropdown-menu { display: block; opacity: 1; visibility: visible; }
+        
+        .dropdown-menu { 
+            display: none; position: absolute; top: 100%; left: 0; background: var(--pure-white); 
+            border: 1px solid var(--border-color); box-shadow: 0 4px 12px rgba(0,0,0,0.05); 
+            list-style: none; min-width: 280px; padding: 0.5rem 0; margin-top: 0.5rem; border-radius: 4px;
+        }
+        .dropdown-menu li a { display: block; padding: 0.6rem 1.2rem; font-size: 0.9rem; color: var(--secondary-gray); font-weight: 500; }
+        .dropdown-menu li a:hover { background-color: var(--light-gray); color: var(--primary-dark); }
+
+        /* Hero Layout */
+        .solution-hero { max-width: 1200px; margin: 0 auto; padding: 5rem 2rem 3rem; border-bottom: 1px solid var(--border-color); }
+        .solution-hero h1 { font-size: 3rem; line-height: 1.15; margin-bottom: 1.5rem; }
+        .solution-hero p { font-size: 1.2rem; color: var(--secondary-gray); max-width: 850px; }
+
+        .content-container { max-width: 1200px; margin: 5rem auto; padding: 0 2rem; display: grid; grid-template-columns: 2fr 1fr; gap: 4rem; }
+        
+        /* Core Descriptions */
+        .main-content h2 { font-size: 1.8rem; margin-bottom: 1.5rem; }
+        .main-content p { font-size: 1.05rem; color: var(--secondary-gray); margin-bottom: 2rem; }
+        
+        .pillar-block { margin-bottom: 3rem; }
+        .pillar-block h3 { font-size: 1.35rem; margin-bottom: 1rem; text-transform: uppercase; letter-spacing: 0.02em; }
+        .pillar-block ul { list-style: square; padding-left: 1.5rem; color: var(--secondary-gray); margin-bottom: 1.5rem; }
+        .pillar-block ul li { margin-bottom: 0.5rem; font-size: 1rem; }
+
+        /* Callout Box */
+        .tech-quote { background: var(--light-gray); padding: 2rem; border-left: 4px solid var(--primary-dark); border-radius: 4px; margin: 3.5rem 0; }
+        .tech-quote h4 { font-size: 1.1rem; margin-bottom: 0.5rem; }
+        .tech-quote p { font-size: 0.95rem; color: var(--secondary-gray); margin-bottom: 0; }
+
+        /* Sidebar Elements */
+        .specs-sidebar { display: flex; flex-direction: column; gap: 2rem; }
+        .spec-box { border: 1px solid var(--border-color); padding: 2rem; border-radius: 4px; }
+        .spec-box h3 { font-size: 1rem; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 1rem; }
+        .spec-box ul { list-style: none; }
+        .spec-box ul li { font-size: 0.9rem; color: var(--secondary-gray); padding: 0.5rem 0; border-bottom: 1px solid var(--light-gray); }
+        .spec-box ul li strong { color: var(--primary-dark); }
+
+        /* Production 45-Line Global Footer */
+        footer { background-color: var(--light-gray); border-top: 1px solid var(--border-color); padding: 4rem 2rem 2rem; font-size: 0.9rem; margin-top: 8rem; }
+        .footer-grid { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 2.5rem; }
+        .footer-col h4 { font-size: 1rem; margin-bottom: 1.2rem; text-transform: uppercase; letter-spacing: 0.05em; }
+        .footer-col a { display: block; color: var(--secondary-gray); margin-bottom: 0.6rem; font-size: 0.85rem; transition: color 0.2s; }
+        .footer-col a:hover { color: var(--primary-dark); }
+        
+        .footer-procurement-block { max-width: 1200px; margin: 3rem auto 0; padding-top: 2rem; border-top: 1px solid var(--border-color); color: var(--secondary-gray); }
+        .footer-procurement-block h4 { color: var(--primary-dark); font-size: 1rem; margin-bottom: 0.8rem; text-transform: uppercase; }
+        .footer-procurement-block p { font-size: 0.85rem; margin-bottom: 0.5rem; line-height: 1.5; }
+        
+        .footer-bottom { max-width: 1200px; margin: 2rem auto 0; padding-top: 1.5rem; border-top: 1px solid var(--border-color); display: flex; justify-content: space-between; flex-wrap: wrap; font-size: 0.8rem; color: var(--secondary-gray); }
+        .footer-bottom a { margin-left: 1rem; text-decoration: underline; }
+
+        /* Responsive Design Rules */
+        @media (max-width: 992px) {
+            .content-container { grid-template-columns: 1fr; gap: 3rem; }
+        }
+        @media (max-width: 768px) {
+            .nav-container { flex-direction: column; gap: 1rem; text-align: center; }
+            .nav-menu { flex-wrap: wrap; justify-content: center; }
+            .solution-hero h1 { font-size: 2.25rem; }
+            .dropdown-menu { position: static; box-shadow: none; border: none; padding-left: 1rem; min-width: 100%; display: block; opacity: 1; visibility: visible; }
+            .footer-bottom { flex-direction: column; gap: 1rem; text-align: center; }
+            .footer-bottom div { margin-top: 0.5rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header / Navigation Menu Ecosystem -->
+    <header>
+        <nav class="nav-container">
+            <div class="logo">Solomon Kin LLC <br><span>via REALAiID.com</span></div>
+            <ul class="nav-menu">
+                <li class="nav-item"><a href="../index.html" class="nav-link">Home</a></li>
+                <li class="nav-item">
+                    <span class="nav-link">About Us ▾</span>
+                    <ul class="dropdown-menu">
+                        <li><a href="../about/profile.html">Corporate Profile & Personnel</a></li>
+                        <li><a href="../about/credentials.html">Certifications & Identifiers</a></li>
+                        <li><a href="../about/partnerships.html">Strategic Non-Profit Network</a></li>
+                    </ul>
+                </li>
+                <li class="nav-item">
+                    <span class="nav-link">Core Divisions ▾</span>
+                    <ul class="dropdown-menu">
+                        <li><a href="identity-forensics.html">High-Assurance IDV & Forensics</a></li>
+                        <li><a href="../records-governance/employee-hr.html">Records Keeping & HR Information Systems</a></li>
+                        <li><a href="behavioral-health.html">Forensic Behavioral Health Tech</a></li>
+                        <li><a href="autonomous-transport.html">Transport Safety Analytics</a></li>
+                        <li><a href="student-loans.html">Student Financial Counseling</a></li>
+                        <li><a href="it-cybersecurity.html">IT Systems & Cybersecurity</a></li>
+                        <li><a href="workforce-hr.html">Workforce Supply & Compliance</a></li>
+                    </ul>
+                </li>
+                <li class="nav-item">
+                    <span class="nav-link">Asset Leasing ▾</span>
+                    <ul class="dropdown-menu">
+                        <li><a href="../leasing/industrial-machinery.html">Heavy Machinery Rental</a></li>
+                        <li><a href="../leasing/tech-hardware.html">Technology Hardware Assets</a></li>
+                    </ul>
+                </li>
+                <li class="nav-item">
+                    <span class="nav-link">Procurement ▾</span>
+                    <ul class="dropdown-menu">
+                        <li><a href="../procurement/capability-statement.html">Capability Statement</a></li>
+                        <li><a href="../procurement/subcontracting.html">Subcontractor Portal Intake</a></li>
+                    </ul>
+                </li>
+                <li class="nav-item"><a href="../contact.html" class="nav-link">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Division Hero Block -->
+    <section class="solution-hero">
+        <h1>Digital Identity Verification & Forensic Technology</h1>
+        <p>Deploying high-assurance verification, zero-trust loops, and cryptographic content provenance to anchor data integrity within modern institutional ecosystems.</p>
+    </section>
+
+    <!-- Core Technical Architecture Details -->
+    <main class="content-container">
+        
+        <!-- Left Column: Core Technical Profiles -->
+        <div class="main-content">
+            <h2>Sovereign Identity Architectures</h2>
+            <p>Every programmatic operation managed by Solomon Kin LLC is secured by an underlying, high-assurance digital identity layer. Powered by our core frameworks developed under REALAiID.com, we specialize in eliminating authentication friction while maintaining strict compliance protocols across municipal, medical, and workforce platforms.</p>
+            
+            <div class="pillar-block">
+                <h3>1. Bio-Verified Client & Personnel Intake</h3>
+                <p>We build biometric validation pathways into standard field systems, ensuring that personnel records, temporary employee assignments, and client-facing casework records match verified physical individuals. This drastically eliminates identity fraud, spoofing, and database replication errors.</p>
+                <ul>
+                    <li>Hardware-bound identity enrollment processes</li>
+                    <li>NFC-based secure data transfer loops for rapid on-site intake</li>
+                    <li>Protected, decentralized credential processing</li>
+                </ul>
+            </div>
+
+            <div class="pillar-block">
+                <h3>2. Cryptographic Content Provenance</h3>
+                <p>In modern digital environments, verifying the origin and history of records is critical. We utilize cryptographic ledger models to assign unalterable digital watermarks and signature chains to official files, reports, and data strings, creating an ironclad proof of origin.</p>
+                <ul>
+                    <li>Immutable record-stamping loops for sensitive clinical and civil evaluations</li>
+                    <li>Anti-tamper protection structures for transit analytics and financial logging</li>
+                    <li>Complete provenance tracking across distributed prime-subcontractor layers</li>
+                </ul>
+            </div>
+
+            <div class="pillar-block">
+                <h3>3. Digital Forensics & System Auditing</h3>
+                <p>Our law enforcement and IT systems backgrounds drive our approach to compliance monitoring. We deploy sophisticated vulnerability tracking architectures, forensic file inspections, and comprehensive transaction logs to guarantee complete audit readiness for grant-backed programs.</p>
+                <ul>
+                    <li>Deep forensic trace analysis of institutional data flows</li>
+                    <li>System vulnerability scanning and remediation plans</li>
+                    <li>Chain-of-custody enforcement for regulatory file repositories</li>
+                </ul>
+            </div>
+
+            <!-- Integrated Cross-Project Application Callout -->
+            <div class="tech-quote">
+                <h4>Systemic Value-Add Integration</h4>
+                <p>Rather than functioning as a isolated technical component, this high-assurance architecture serves as the secure backbone for all Solomon Kin LLC divisions. It powers our forensic evaluations for child welfare databases, protects higher-education student records, secures employee HR rosters, and logs metrics for autonomous transport analytics.</p>
+            </div>
+        </div>
+
+        <!-- Right Column: Procurement Data Mapping -->
+        <aside class="specs-sidebar">
+            
+            <div class="spec-box">
+                <h3>Primary Technology Codes</h3>
+                <ul>
+                    <li><strong>NAICS 541512:</strong> Computer Systems Design</li>
+                    <li><strong>NAICS 541511:</strong> Custom Computer Programming</li>
+                    <li><strong>NAICS 561611:</strong> Digital Forensic & IDV Investigations</li>
+                    <li><strong>PSC DJ01:</strong> Security and Compliance Support</li>
+                </ul>
+            </div>
+
+            <div class="spec-box">
+                <h3>Deployment Architectures</h3>
+                <ul>
+                    <li><strong>Model:</strong> Zero-Trust Infrastructure</li>
+                    <li><strong>Core Base:</strong> Hardware-Bound Crypto Tokens</li>
+                    <li><strong>Audit Loop:</strong> Permanent Ledger Tracking</li>
+                    <li><strong>Compliance:</strong> PII / PHI Isolation Guardrails</li>
+                </ul>
+            </div>
+
+        </aside>
+
+    </main>
+
+    <!-- Hard Procurement Global Data Footer -->
+    <footer>
+        <div class="footer-grid">
+            <div class="footer-col">
+                <h4>Corporate Profile</h4>
+                <a href="../about/profile.html">About Solomon Kin LLC</a>
+                <a href="../about/credentials.html">Certifications & Identifiers</a>
+                <a href="../about/partnerships.html">Strategic Non-Profit Network</a>
+            </div>
+            <div class="footer-col">
+                <h4>Operating Divisions</h4>
+                <a href="identity-forensics.html">Identity Verification & Forensics</a>
+                <a href="../records-governance/employee-hr.html">Records Keeping & HRIS</a>
+                <a href="behavioral-health.html">Forensic Behavioral Tech</a>
+                <a href="autonomous-transport.html">Transport Safety Analytics</a>
+                <a href="student-loans.html">Student Financial Counseling</a>
+                <a href="it-cybersecurity.html">IT Systems & Cybersecurity</a>
+                <a href="workforce-hr.html">Workforce Supply & Compliance</a>
+            </div>
+            <div class="footer-col">
+                <h4>Asset Leasing</h4>
+                <a href="../leasing/industrial-machinery.html">Heavy Machinery Rental</a>
+                <a href="../leasing/tech-hardware.html">Technology Hardware Assets</a>
+            </div>
+            <div class="footer-col">
+                <h4>Procurement & B2G</h4>
+                <a href="../procurement/capability-statement.html">View Capability Statement</a>
+                <a href="../procurement/subcontracting.html">Subcontractor Portal</a>
+                <a href="../contact.html">Submit B2G Inquiry</a>
+            </div>
+        </div>
+
+        <div class="footer-procurement-block">
+            <h4>Federal, State & Municipal Contracting Registrations</h4>
+            <p><strong>Legal Entity:</strong> Solomon Kin LLC (via REALAiID.com) &nbsp;|&nbsp; <strong>Principal Investigator / CTO:</strong> Nehemiah M. Brown</p>
+            <p><strong>Unique Entity ID (UEI):</strong> H8YDYLEK6283 &nbsp;|&nbsp; <strong>EIN:</strong> 82-4565975 &nbsp;|&nbsp; <strong>DUNS:</strong> 145053632 &nbsp;|&nbsp; <strong>SBC ID:</strong> SBC_002678850</p>
+            <p><strong>Primary NAICS Classification:</strong> 541512 (Computer Systems Design Services)</p>
+            <p><strong>Core Capabilities Mapped:</strong> Enterprise Records Governance | Human Resource Information Systems (HRIS) | Identity Trust Frameworks | Digital Forensics | Heavy Machinery Fleet Leasing</p>
+            <p><strong>System Status:</strong> Active on SAM.gov | Minority Business Enterprise (MBE) Status Verified | Regional Presence: Philadelphia, PA</p>
+        </div>
+
+        <div class="footer-bottom">
+            <p>&copy; 2026 Solomon Kin LLC. All Rights Reserved. Executive Directives executed via REALAiID.com.</p>
+            <div>
+                <a href="../privacy-policy.html">Privacy Policy</a>
+                <a href="../terms-of-service.html">Terms of Procurement</a>
+            </div>
+        </div>
+    </footer>
+
+</body>
+</html>
