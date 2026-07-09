@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Route Resolution Error (404) — Solomon Kin LLC</title>
+    <style>
+        /* Base Reset & Variables */
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; }
+        :root { --primary-dark: #111111; --secondary-gray: #444444; --light-gray: #f5f5f5; --border-color: #dddddd; --pure-white: #ffffff; }
+        body { background-color: var(--pure-white); color: var(--primary-dark); line-height: 1.6; }
+        a { text-decoration: none; color: inherit; }
+
+        /* Typography */
+        h1, h2, h3, h4 { font-weight: 700; color: var(--primary-dark); letter-spacing: -0.02em; }
+
+        /* Navigation Header */
+        header { width: 100%; border-bottom: 1px solid var(--border-color); background: var(--pure-white); position: sticky; top: 0; z-index: 1000; }
+        .nav-container { max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; padding: 1rem 2rem; }
+        .logo { font-size: 1.35rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.05em; }
+        .logo span { font-weight: 400; color: var(--secondary-gray); font-size: 0.9rem; text-transform: none; }
+        
+        /* Dropdown Menu Mechanics */
+        .nav-menu { display: flex; list-style: none; }
+        .nav-item { position: relative; padding: 0.5rem 1rem; }
+        .nav-link { font-size: 0.95rem; font-weight: 600; color: var(--secondary-gray); cursor: pointer; transition: color 0.2s; }
+        .nav-link:hover { color: var(--primary-dark); }
+        .nav-item:hover .dropdown-menu { display: block; opacity: 1; visibility: visible; }
+        
+        .dropdown-menu { 
+            display: none; position: absolute; top: 100%; left: 0; background: var(--pure-white); 
+            border: 1px solid var(--border-color); box-shadow: 0 4px 12px rgba(0,0,0,0.05); 
+            list-style: none; min-width: 280px; padding: 0.5rem 0; margin-top: 0.5rem; border-radius: 4px;
+        }
+        .dropdown-menu li a { display: block; padding: 0.6rem 1.2rem; font-size: 0.9rem; color: var(--secondary-gray); font-weight: 500; }
+        .dropdown-menu li a:hover { background-color: var(--light-gray); color: var(--primary-dark); }
+
+        /* Error Layout Panel */
+        .error-wrapper { max-width: 800px; margin: 6rem auto; padding: 0 2rem; text-align: left; }
+        .system-code { font-family: monospace; font-size: 1rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; color: var(--secondary-gray); margin-bottom: 0.5rem; }
+        .error-wrapper h1 { font-size: 2.5rem; line-height: 1.2; margin-bottom: 1.5rem; }
+        .error-wrapper p { font-size: 1.1rem; color: var(--secondary-gray); margin-bottom: 2.5rem; max-width: 650px; }
+        
+        /* Link Array Grid */
+        .directory-box { border: 1px solid var(--border-color); border-radius: 4px; padding: 2rem; margin-bottom: 2.5rem; background: var(--light-gray); }
+        .directory-box h3 { font-size: 1rem; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 1rem; }
+        .link-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+        .link-grid a { font-size: 0.95rem; font-weight: 600; color: var(--primary-dark); display: flex; align-items: center; gap: 0.4rem; }
+        .link-grid a:hover { text-decoration: underline; }
+
+        .btn-home { inline-size: max-content; display: block; padding: 0.8rem 1.8rem; font-size: 0.95rem; font-weight: 600; background-color: var(--primary-dark); color: var(--pure-white); border: 1px solid var(--primary-dark); border-radius: 4px; cursor: pointer; }
+        .btn-home:hover { background-color: #333333; }
+
+        /* Production 45-Line Global Footer */
+        footer { background-color: var(--light-gray); border-top: 1px solid var(--border-color); padding: 4rem 2rem 2rem; font-size: 0.9rem; margin-top: 12rem; }
+        .footer-grid { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 2.5rem; }
+        .footer-col h4 { font-size: 1rem; margin-bottom: 1.2rem; text-transform: uppercase; letter-spacing: 0.05em; }
+        .footer-col a { display: block; color: var(--secondary-gray); margin-bottom: 0.6rem; font-size: 0.85rem; transition: color 0.2s; }
+        .footer-col a:hover { color: var(--primary-dark); }
+        
+        .footer-procurement-block { max-width: 1200px; margin: 3rem auto 0; padding-top: 2rem; border-top: 1px solid var(--border-color); color: var(--secondary-gray); }
+        .footer-procurement-block h4 { color: var(--primary-dark); font-size: 1rem; margin-bottom: 0.8rem; text-transform: uppercase; }
+        .footer-procurement-block p { font-size: 0.85rem; margin-bottom: 0.5rem; line-height: 1.5; }
+        
+        .footer-bottom { max-width: 1200px; margin: 2rem auto 0; padding-top: 1.5rem; border-top: 1px solid var(--border-color); display: flex; justify-content: space-between; flex-wrap: wrap; font-size: 0.8rem; color: var(--secondary-gray); }
+        .footer-bottom a { margin-left: 1rem; text-decoration: underline; }
+
+        /* Responsive Design Rules */
+        @media (max-width: 768px) {
+            .nav-container { flex-direction: column; gap: 1rem; text-align: center; }
+            .nav-menu { flex-wrap: wrap; justify-content: center; }
+            .error-wrapper h1 { font-size: 2rem; }
+            .link-grid { grid-template-columns: 1fr; }
+            .dropdown-menu { position: static; box-shadow: none; border: none; padding-left: 1rem; min-width: 100%; display: block; opacity: 1; visibility: visible; }
+            .footer-bottom { flex-direction: column; gap: 1rem; text-align: center; }
+            .footer-bottom div { margin-top: 0.5rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header / Navigation Menu Ecosystem -->
+    <header>
+        <nav class="nav-container">
+            <div class="logo">Solomon Kin LLC <br><span>via REALAiID.com</span></div>
+            <ul class="nav-menu">
+                <li class="nav-item"><a href="/index.html" class="nav-link">Home</a></li>
+                <li class="nav-item">
+                    <span class="nav-link">About Us ▾</span>
+                    <ul class="dropdown-menu">
+                        <li><a href="/about/profile.html">Corporate Profile & Personnel</a></li>
+                        <li><a href="/about/credentials.html">Certifications & Identifiers</a></li>
+                        <li><a href="/about/partnerships.html">Strategic Non-Profit Network</a></li>
+                    </ul>
+                </li>
+                <li class="nav-item">
+                    <span class="nav-link">Core Divisions ▾</span>
+                    <ul class="dropdown-menu">
+                        <li><a href="/solutions/identity-forensics.html">High-Assurance IDV & Forensics</a></li>
+                        <li><a href="/records-governance/employee-hr.html">Records Keeping & HR Information Systems</a></li>
+                        <li><a href="/solutions/behavioral-health.html">Forensic Behavioral Health Tech</a></li>
+                        <li><a href="/solutions/autonomous-transport.html">Transport Safety Analytics</a></li>
+                        <li><a href="/solutions/student-loans.html">Student Financial Counseling</a></li>
+                        <li><a href="/solutions/it-cybersecurity.html">IT Systems & Cybersecurity</a></li>
+                        <li><a href="/solutions/workforce-hr.html">Workforce Supply & Compliance</a></li>
+                    </ul>
+                </li>
+                <li class="nav-item">
+                    <span class="nav-link">Asset Leasing ▾</span>
+                    <ul class="dropdown-menu">
+                        <li><a href="/leasing/industrial-machinery.html">Heavy Machinery Rental</a></li>
+                        <li><a href="/leasing/tech-hardware.html">Technology Hardware Assets</a></li>
+                    </ul>
+                </li>
+                <li class="nav-item">
+                    <span class="nav-link">Procurement ▾</span>
+                    <ul class="dropdown-menu">
+                        <li><a href="/procurement/capability-statement.html">Capability Statement</a></li>
+                        <li><a href="/procurement/subcontracting.html">Subcontractor Portal Intake</a></li>
+                    </ul>
+                </li>
+                <li class="nav-item"><a href="/contact.html" class="nav-link">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Error Frame Routing Anchor -->
+    <main class="error-wrapper">
+        <div class="system-code">Status: 404 Resolution Error</div>
+        <h1>Requested Resource Not Found</h1>
+        <p>The system cannot resolve the specified link. This may occur if a link from a proposal submission has updated or if a tracking file has relocated within the procurement directory.</p>
+        
+        <!-- Interactive Traffic Recovery Links -->
+        <div class="directory-box">
+            <h3>Primary Gateway Directories</h3>
+            <div class="link-grid">
+                <a href="/procurement/capability-statement.html">→ Core Capability Statement</a>
+                <a href="/records-governance/employee-hr.html">→ Records Keeping & HRIS Division</a>
+                <a href="/contact.html">→ Secure Procurement Contact Intake</a>
+                <a href="/about/credentials.html">→ Corporate Registrations & SAM Data</a>
+            </div>
+        </div>
+
+        <a href="/index.html" class="btn-home">Return to Corporate Homepage</a>
+    </main>
+
+    <!-- Hard Procurement Global Data Footer -->
+    <footer>
+        <div class="footer-grid">
+            <div class="footer-col">
+                <h4>Corporate Profile</h4>
+                <a href="/about/profile.html">About Solomon Kin LLC</a>
+                <a href="/about/credentials.html">Certifications & Identifiers</a>
+                <a href="/about/partnerships.html">Strategic Non-Profit Network</a>
+            </div>
+            <div class="footer-col">
+                <h4>Operating Divisions</h4>
+                <a href="/solutions/identity-forensics.html">Identity Verification & Forensics</a>
+                <a href="/records-governance/employee-hr.html">Records Keeping & HRIS</a>
+                <a href="/solutions/behavioral-health.html">Forensic Behavioral Tech</a>
+                <a href="/solutions/autonomous-transport.html">Transport Safety Analytics</a>
+                <a href="/solutions/student-loans.html">Student Financial Counseling</a>
+                <a href="/solutions/workforce-hr.html">Workforce Supply & Compliance</a>
+            </div>
+            <div class="footer-col">
+                <h4>Asset Leasing</h4>
+                <a href="/leasing/industrial-machinery.html">Heavy Machinery Rental</a>
+                <a href="/leasing/tech-hardware.html">Enterprise Technology Assets</a>
+            </div>
+            <div class="footer-col">
+                <h4>Procurement & B2G</h4>
+                <a href="/procurement/capability-statement.html">View Capability Statement</a>
+                <a href="/procurement/subcontracting.html">Subcontractor Portal</a>
+                <a href="/contact.html">Submit B2G Inquiry</a>
+            </div>
+        </div>
+
+        <div class="footer-procurement-block">
+            <h4>Federal, State & Municipal Contracting Registrations</h4>
+            <p><strong>Legal Entity:</strong> Solomon Kin LLC (via REALAiID.com) &nbsp;|&nbsp; <strong>Principal Investigator / CTO:</strong> Nehemiah M. Brown</p>
+            <p><strong>Unique Entity ID (UEI):</strong> H8YDYLEK6283 &nbsp;|&nbsp; <strong>EIN:</strong> 82-4565975 &nbsp;|&nbsp; <strong>DUNS:</strong> 145053632 &nbsp;|&nbsp; <strong>SBC ID:</strong> SBC_002678850</p>
+            <p><strong>Primary NAICS Classification:</strong> 541512 (Computer Systems Design Services)</p>
+            <p><strong>Core Capabilities Mapped:</strong> Enterprise Records Governance | Human Resource Information Systems (HRIS) | Identity Trust Frameworks | Digital Forensics | Heavy Machinery Fleet Leasing</p>
+            <p><strong>System Status:</strong> Active on SAM.gov | Minority Business Enterprise (MBE) Status Verified | Regional Presence: Philadelphia, PA</p>
+        </div>
+
+        <div class="footer-bottom">
+            <p>&copy; 2026 Solomon Kin LLC. All Rights Reserved. Executive Directives executed via REALAiID.com.</p>
+            <div>
+                <a href="/privacy-policy.html">Privacy Policy</a>
+                <a href="/terms-of-service.html">Terms of Procurement</a>
+            </div>
+        </div>
+    </footer>
+
+</body>
+</html>
