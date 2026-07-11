@@ -32,13 +32,11 @@
         /* CSS Dropdown Menu Mechanics */
         .nav-menu { display: flex; list-style: none; align-items: center; }
         .nav-item { position: relative; padding: 0.5rem 1rem; }
-        .nav-link { font-size: 0.95rem; font-weight: 600; color: var(--secondary-gray); cursor: pointer; transition: color 0.2s; display: flex; align-items: center; gap: 0.25rem; }
+        .nav-link { font-size: 0.95rem; font-weight: 600; color: var(--secondary-gray); cursor: pointer; user-select: none; transition: color 0.2s; display: flex; align-items: center; gap: 0.25rem; }
         .nav-link:hover { color: var(--primary-dark); }
         
-        /* Hover triggers for Desktop viewports */
-        @media (min-width: 992px) {
-            .nav-item:hover .dropdown-menu { display: block; opacity: 1; visibility: visible; }
-        }
+        /* Interactive click-activation classes for submenus */
+        .nav-item.open-active .dropdown-menu { display: block; opacity: 1; visibility: visible; }
         
         .dropdown-menu { 
             display: none; position: absolute; top: 100%; left: 0; background: var(--pure-white); 
@@ -114,8 +112,8 @@
             .nav-item { padding: 0.5rem 1.5rem; }
             .nav-link { justify-content: space-between; padding: 0.5rem 0; width: 100%; }
             
-            /* Responsive Dropdown Actions */
-            .nav-item.active-click .dropdown-menu { display: block; position: static; visibility: visible; opacity: 1; box-shadow: none; border: none; padding-left: 1rem; width: 100%; margin-top: 0.25rem; }
+            /* Mobile Accordion Override Styles */
+            .nav-item.open-active .dropdown-menu { display: block; position: static; box-shadow: none; border: none; padding-left: 1rem; width: 100%; margin-top: 0.25rem; }
             
             .hero { padding: 4rem 1.5rem; }
             .pipeline-notice { margin: 2rem 1.5rem 0; padding: 1.25rem 1.5rem; }
@@ -285,7 +283,7 @@
             <div class="footer-col">
                 <h4>Asset Leasing</h4>
                 <a href="leasing/industrial-machinery.html">Heavy Machinery Rental</a>
-                <a href="leasing/tech-hardware.html">Enterprise Technology Assets</a>
+                <a href="leasing/tech-hardware.html">Technology Hardware Assets</a>
             </div>
             <div class="footer-col">
                 <h4>Procurement & B2G</h4>
@@ -313,7 +311,7 @@
         </div>
     </footer>
 
-    <!-- Logic Engine for Responsive Interfaces -->
+    <!-- Logic Engine for Cross-Device Interface Click Mechanics -->
     <script>
         function toggleMobileMenu() {
             var menu = document.getElementById('navMenu');
@@ -321,25 +319,33 @@
         }
 
         function toggleDropdown(element, event) {
-            if (window.innerWidth <= 991) {
-                // If the click is coming directly from a link inside the dropdown, do not toggle accordion.
-                if (event.target.tagName === 'A') return;
-                
-                event.preventDefault();
-                event.stopPropagation();
-                
-                var isActive = element.classList.contains('active-click');
-                
-                // Close all other instances
-                document.querySelectorAll('.nav-item').forEach(function(item) {
-                    item.classList.remove('active-click');
-                });
-                
-                if (!isActive) {
-                    element.classList.add('active-click');
-                }
+            // Check if the click event originated directly inside a link within the dropdown menu
+            if (event.target.tagName === 'A') return;
+            
+            event.preventDefault();
+            event.stopPropagation();
+            
+            var isActive = element.classList.contains('open-active');
+            
+            // Close all active sibling dropdowns across both viewports
+            document.querySelectorAll('.nav-item').forEach(function(item) {
+                item.classList.remove('open-active');
+            });
+            
+            // If the element clicked wasn't already active, open it
+            if (!isActive) {
+                element.classList.add('open-active');
             }
         }
+
+        // Global Event Listener: Closes open submenus if a user clicks outside the header bounding box on Desktop
+        window.addEventListener('click', function(e) {
+            if (!e.target.closest('.nav-item')) {
+                document.querySelectorAll('.nav-item').forEach(function(item) {
+                    item.classList.remove('open-active');
+                });
+            }
+        });
     </script>
 </body>
 </html>
