@@ -7,8 +7,14 @@
     <style>
         /* Base Reset & Variables */
         * { box-sizing: border-box; margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; }
-        :root { --primary-dark: #111111; --secondary-gray: #444444; --light-gray: #f5f5f5; --border-color: #dddddd; --pure-white: #ffffff; }
-        body { background-color: var(--pure-white); color: var(--primary-dark); line-height: 1.6; }
+        :root { 
+            --primary-dark: #111111; 
+            --secondary-gray: #444444; 
+            --light-gray: #f5f5f5; 
+            --border-color: #dddddd; 
+            --pure-white: #ffffff; 
+        }
+        body { background-color: var(--pure-white); color: var(--primary-dark); line-height: 1.6; -webkit-font-smoothing: antialiased; }
         a { text-decoration: none; color: inherit; }
 
         /* Typography */
@@ -16,36 +22,43 @@
 
         /* Navigation Header */
         header { width: 100%; border-bottom: 1px solid var(--border-color); background: var(--pure-white); position: sticky; top: 0; z-index: 1000; }
-        .nav-container { max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; padding: 1rem 2rem; }
-        .logo { font-size: 1.35rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.05em; }
-        .logo span { font-weight: 400; color: var(--secondary-gray); font-size: 0.9rem; text-transform: none; }
+        .nav-container { max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; padding: 1rem 2rem; position: relative; }
+        .logo { font-size: 1.35rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.05em; line-height: 1.2; z-index: 1001; }
+        .logo span { font-weight: 400; color: var(--secondary-gray); font-size: 0.9rem; text-transform: none; display: inline-block; }
         
-        /* Dropdown Menu Mechanics */
-        .nav-menu { display: flex; list-style: none; }
+        /* Mobile Menu Toggle Button */
+        .menu-toggle { display: none; background: none; border: none; font-size: 1.5rem; cursor: pointer; color: var(--primary-dark); z-index: 1001; padding: 0.5rem; }
+
+        /* CSS Dropdown Menu Mechanics */
+        .nav-menu { display: flex; list-style: none; align-items: center; }
         .nav-item { position: relative; padding: 0.5rem 1rem; }
-        .nav-link { font-size: 0.95rem; font-weight: 600; color: var(--secondary-gray); cursor: pointer; transition: color 0.2s; }
+        .nav-link { font-size: 0.95rem; font-weight: 600; color: var(--secondary-gray); cursor: pointer; user-select: none; transition: color 0.2s; display: flex; align-items: center; gap: 0.25rem; }
         .nav-link:hover { color: var(--primary-dark); }
-        .nav-item:hover .dropdown-menu { display: block; opacity: 1; visibility: visible; }
+        
+        /* Interactive click-activation class for submenus */
+        .nav-item.open-active .dropdown-menu { display: block; opacity: 1; visibility: visible; }
         
         .dropdown-menu { 
             display: none; position: absolute; top: 100%; left: 0; background: var(--pure-white); 
             border: 1px solid var(--border-color); box-shadow: 0 4px 12px rgba(0,0,0,0.05); 
             list-style: none; min-width: 280px; padding: 0.5rem 0; margin-top: 0.5rem; border-radius: 4px;
         }
-        .dropdown-menu li a { display: block; padding: 0.6rem 1.2rem; font-size: 0.9rem; color: var(--secondary-gray); font-weight: 500; }
+        .dropdown-menu li a { display: block; padding: 0.6rem 1.2rem; font-size: 0.9rem; color: var(--secondary-gray); font-weight: 500; transition: background 0.2s; }
         .dropdown-menu li a:hover { background-color: var(--light-gray); color: var(--primary-dark); }
 
         /* Capability Layout */
         .capability-hero { max-width: 1200px; margin: 0 auto; padding: 5rem 2rem 3rem; border-bottom: 1px solid var(--border-color); display: flex; justify-content: space-between; align-items: flex-end; flex-wrap: wrap; gap: 2rem; }
-        .hero-text h1 { font-size: 3rem; line-height: 1.15; margin-bottom: 1rem; }
-        .hero-text p { font-size: 1.2rem; color: var(--secondary-gray); max-width: 800px; }
+        .hero-text { flex: 1; min-width: 280px; }
+        .hero-text h1 { font-size: clamp(2rem, 5vw, 3rem); line-height: 1.15; margin-bottom: 1rem; }
+        .hero-text p { font-size: clamp(1.05rem, 2vw, 1.2rem); color: var(--secondary-gray); max-width: 800px; }
         
-        .btn-download { padding: 0.8rem 1.8rem; font-size: 0.95rem; font-weight: 600; background: var(--primary-dark); color: var(--pure-white); border: 1px solid var(--primary-dark); border-radius: 4px; cursor: pointer; }
+        .btn-download { padding: 0.8rem 1.8rem; font-size: 0.95rem; font-weight: 600; background: var(--primary-dark); color: var(--pure-white); border: 1px solid var(--primary-dark); border-radius: 4px; cursor: pointer; transition: background 0.2s; white-space: nowrap; }
         .btn-download:hover { background: #333333; }
 
         .statement-grid { max-width: 1200px; margin: 5rem auto; padding: 0 2rem; display: grid; grid-template-columns: 2fr 1fr; gap: 4rem; }
         
         /* Core Modules */
+        .statement-content { min-width: 0; }
         .capability-section { margin-bottom: 4rem; }
         .capability-section h2 { font-size: 1.6rem; margin-bottom: 1.5rem; text-transform: uppercase; letter-spacing: 0.02em; border-bottom: 2px solid var(--primary-dark); padding-bottom: 0.4rem; }
         .capability-section p { font-size: 1.05rem; color: var(--secondary-gray); margin-bottom: 1.5rem; }
@@ -66,9 +79,9 @@
         .meta-box { border: 1px solid var(--border-color); padding: 2rem; border-radius: 4px; background: var(--light-gray); }
         .meta-box h3 { font-size: 1rem; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 1.2rem; border-bottom: 1px solid var(--border-color); padding-bottom: 0.4rem; }
         .meta-list { list-style: none; }
-        .meta-list li { font-size: 0.9rem; color: var(--secondary-gray); padding: 0.4rem 0; border-bottom: 1px solid rgba(0,0,0,0.05); display: flex; justify-content: space-between; }
+        .meta-list li { font-size: 0.9rem; color: var(--secondary-gray); padding: 0.4rem 0; border-bottom: 1px solid rgba(0,0,0,0.05); display: flex; justify-content: space-between; align-items: center; gap: 1rem; }
         .meta-list li strong { color: var(--primary-dark); }
-        .meta-list li span { font-family: monospace; font-size: 0.95rem; }
+        .meta-list li span { font-family: monospace; font-size: 0.95rem; text-align: right; word-break: break-all; }
 
         /* Global Footer */
         footer { background-color: var(--light-gray); border-top: 1px solid var(--border-color); padding: 4rem 2rem 2rem; font-size: 0.9rem; margin-top: 8rem; }
@@ -81,15 +94,34 @@
         .footer-procurement-block h4 { color: var(--primary-dark); font-size: 1rem; margin-bottom: 0.8rem; text-transform: uppercase; }
         .footer-procurement-block p { font-size: 0.85rem; margin-bottom: 0.5rem; line-height: 1.5; }
         
-        .footer-bottom { max-width: 1200px; margin: 2rem auto 0; padding-top: 1.5rem; border-top: 1px solid var(--border-color); display: flex; justify-content: space-between; flex-wrap: wrap; font-size: 0.8rem; color: var(--secondary-gray); }
+        .footer-bottom { max-width: 1200px; margin: 2rem auto 0; padding-top: 1.5rem; border-top: 1px solid var(--border-color); display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; font-size: 0.8rem; color: var(--secondary-gray); }
+        .footer-bottom div { display: flex; gap: 1rem; }
+        .footer-bottom a { text-decoration: underline; }
 
-        @media (max-width: 992px) { .statement-grid { grid-template-columns: 1fr; gap: 3rem; } }
-        @media (max-width: 768px) {
-            .nav-container { flex-direction: column; gap: 1rem; text-align: center; }
-            .nav-menu { flex-wrap: wrap; justify-content: center; }
-            .capability-hero { flex-direction: column; align-items: flex-start; }
-            .hero-text h1 { font-size: 2.25rem; }
-            .dropdown-menu { position: static; box-shadow: none; border: none; padding-left: 1rem; display: block; opacity: 1; visibility: visible; }
+        @media (max-width: 991px) { 
+            .menu-toggle { display: block; }
+            .nav-container { padding: 1rem 1.5rem; }
+            
+            .nav-menu { 
+                display: none; position: absolute; top: 100%; left: 0; width: 100%; 
+                background: var(--pure-white); border-bottom: 1px solid var(--border-color);
+                flex-direction: column; align-items: stretch; padding: 1rem 0; max-height: 75vh; overflow-y: auto;
+            }
+            .nav-menu.active { display: flex; }
+            .nav-item { padding: 0.5rem 1.5rem; }
+            .nav-link { justify-content: space-between; padding: 0.5rem 0; width: 100%; }
+            
+            /* Responsive Dropdown Actions */
+            .nav-item.open-active .dropdown-menu { display: block; position: static; box-shadow: none; border: none; padding-left: 1rem; width: 100%; margin-top: 0.25rem; }
+
+            .statement-grid { grid-template-columns: 1fr; gap: 3rem; padding: 0 1.5rem; margin: 3.5rem auto; }
+            .capability-hero { flex-direction: column; align-items: flex-start; padding: 4rem 1.5rem 2rem; gap: 1.5rem; }
+            .btn-download { width: 100%; text-align: center; }
+            footer { padding: 3rem 1.5rem 1.5rem; margin-top: 5rem; }
+        }
+
+        @media (max-width: 480px) {
+            .footer-bottom { flex-direction: column; text-align: center; align-items: center; }
         }
     </style>
 </head>
@@ -99,9 +131,10 @@
     <header>
         <nav class="nav-container">
             <div class="logo">Solomon Kin LLC <br><span>via REALAiID.com</span></div>
-            <ul class="nav-menu">
+            <button class="menu-toggle" aria-label="Toggle Menu" onclick="toggleMobileMenu()">☰</button>
+            <ul class="nav-menu" id="navMenu">
                 <li class="nav-item"><a href="../index.html" class="nav-link">Home</a></li>
-                <li class="nav-item">
+                <li class="nav-item" onclick="toggleDropdown(this, event)">
                     <span class="nav-link">About Us ▾</span>
                     <ul class="dropdown-menu">
                         <li><a href="../about/profile.html">Corporate Profile & Personnel</a></li>
@@ -109,7 +142,7 @@
                         <li><a href="../about/partnerships.html">Strategic Non-Profit Network</a></li>
                     </ul>
                 </li>
-                <li class="nav-item">
+                <li class="nav-item" onclick="toggleDropdown(this, event)">
                     <span class="nav-link">Core Divisions ▾</span>
                     <ul class="dropdown-menu">
                         <li><a href="../solutions/identity-forensics.html">High-Assurance IDV & Forensics</a></li>
@@ -121,14 +154,14 @@
                         <li><a href="../solutions/workforce-hr.html">Workforce Supply & Compliance</a></li>
                     </ul>
                 </li>
-                <li class="nav-item">
+                <li class="nav-item" onclick="toggleDropdown(this, event)">
                     <span class="nav-link">Asset Leasing ▾</span>
                     <ul class="dropdown-menu">
                         <li><a href="../leasing/industrial-machinery.html">Heavy Machinery Rental</a></li>
                         <li><a href="../leasing/tech-hardware.html">Technology Hardware Assets</a></li>
                     </ul>
                 </li>
-                <li class="nav-item">
+                <li class="nav-item" onclick="toggleDropdown(this, event)">
                     <span class="nav-link">Procurement ▾</span>
                     <ul class="dropdown-menu">
                         <li><a href="capability-statement.html">Capability Statement</a></li>
@@ -149,7 +182,7 @@
         <button class="btn-download" onclick="window.print();">Print / Save Statement</button>
     </section>
 
-    <!-- Core Core Competency Panels -->
+    <!-- Core Competency Panels -->
     <main class="statement-grid">
         
         <!-- Left Column: Core Statements -->
@@ -214,8 +247,8 @@
                     <li><strong>DUNS:</strong> <span>145053632</span></li>
                     <li><strong>SBC ID:</strong> <span>SBC_002678850</span></li>
                     <li><strong>Registry Status:</strong> <strong style="color: green;">Active (SAM.gov)</strong></li>
-                    <li><strong>Structure:</strong> <span>Minority-Owned Small Business</span></li>
-                    <li><strong>Location:</strong> <span>Philadelphia, PA presence</span></li>
+                    <li><strong>Structure:</strong> <span>Minority-Owned</span></li>
+                    <li><strong>Location:</strong> <span>Philadelphia, PA</span></li>
                 </ul>
             </div>
 
@@ -224,27 +257,27 @@
                 <ul class="meta-list">
                     <li><strong>541512 (Primary):</strong> <span>Systems Design</span></li>
                     <li><strong>541511:</strong> <span>Custom Programming</span></li>
-                    <li><strong>561611:</strong> <span>Background / IDV Services</span></li>
-                    <li><strong>541519:</strong> <span>Other Computer Related</span></li>
-                    <li><strong>541611:</strong> <span>Management Consulting</span></li>
-                    <li><strong>611430:</strong> <span>Professional Training</span></li>
-                    <li><strong>624190:</strong> <span>Individual / Family Services</span></li>
-                    <li><strong>561320:</strong> <span>Temporary Help Supply</span></li>
-                    <li><strong>532412:</strong> <span>Heavy Machinery Lease</span></li>
-                    <li><strong>532420:</strong> <span>Office/IT Machine Lease</span></li>
+                    <li><strong>561611:</strong> <span>Background / IDV</span></li>
+                    <li><strong>541519:</strong> <span>Other Computer Rel</span></li>
+                    <li><strong>541611:</strong> <span>Management Cons</span></li>
+                    <li><strong>611430:</strong> <span>Prof Development</span></li>
+                    <li><strong>624190:</strong> <span>Individual / Family</span></li>
+                    <li><strong>561320:</strong> <span>Temporary Staffing</span></li>
+                    <li><strong>532412:</strong> <span>Heavy Machine Lease</span></li>
+                    <li><strong>532420:</strong> <span>Office/IT Lease</span></li>
                 </ul>
             </div>
 
             <div class="meta-box">
                 <h3>Product Service Codes (PSC)</h3>
                 <ul class="meta-list">
-                    <li><strong>DA01:</strong> <span>IT Business App Support</span></li>
-                    <li><strong>DJ01:</strong> <span>IT Security & Compliance</span></li>
-                    <li><strong>R425:</strong> <span>Engineering/Technical Support</span></li>
-                    <li><strong>G004:</strong> <span>Social - Family Services</span></li>
-                    <li><strong>U008:</strong> <span>Education & Training Modules</span></li>
-                    <li><strong>W038:</strong> <span>Lease of Heavy Machinery</span></li>
-                    <li><strong>W070:</strong> <span>Lease of IT Hardware Gear</span></li>
+                    <li><strong>DA01:</strong> <span>IT Business App</span></li>
+                    <li><strong>DJ01:</strong> <span>IT Cyber Security</span></li>
+                    <li><strong>R425:</strong> <span>Engineering Support</span></li>
+                    <li><strong>G004:</strong> <span>Social - Family Support</span></li>
+                    <li><strong>U008:</strong> <span>Education Training</span></li>
+                    <li><strong>W038:</strong> <span>Lease Heavy Machine</span></li>
+                    <li><strong>W070:</strong> <span>Lease IT Hardware</span></li>
                 </ul>
             </div>
 
@@ -302,5 +335,37 @@
         </div>
     </footer>
 
+    <!-- Logic Engine for Cross-Device Interface Click Mechanics -->
+    <script>
+        function toggleMobileMenu() {
+            var menu = document.getElementById('navMenu');
+            menu.classList.toggle('active');
+        }
+
+        function toggleDropdown(element, event) {
+            if (event.target.tagName === 'A') return;
+            
+            event.preventDefault();
+            event.stopPropagation();
+            
+            var isActive = element.classList.contains('open-active');
+            
+            document.querySelectorAll('.nav-item').forEach(function(item) {
+                item.classList.remove('open-active');
+            });
+            
+            if (!isActive) {
+                element.classList.add('open-active');
+            }
+        }
+
+        window.addEventListener('click', function(e) {
+            if (!e.target.closest('.nav-item')) {
+                document.querySelectorAll('.nav-item').forEach(function(item) {
+                    item.classList.remove('open-active');
+                });
+            }
+        });
+    </script>
 </body>
 </html>
