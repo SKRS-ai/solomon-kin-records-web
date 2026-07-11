@@ -7,8 +7,14 @@
     <style>
         /* Base Reset & Variables */
         * { box-sizing: border-box; margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; }
-        :root { --primary-dark: #111111; --secondary-gray: #444444; --light-gray: #f5f5f5; --border-color: #dddddd; --pure-white: #ffffff; }
-        body { background-color: var(--pure-white); color: var(--primary-dark); line-height: 1.6; }
+        :root { 
+            --primary-dark: #111111; 
+            --secondary-gray: #444444; 
+            --light-gray: #f5f5f5; 
+            --border-color: #dddddd; 
+            --pure-white: #ffffff; 
+        }
+        body { background-color: var(--pure-white); color: var(--primary-dark); line-height: 1.6; -webkit-font-smoothing: antialiased; }
         a { text-decoration: none; color: inherit; }
 
         /* Typography */
@@ -16,33 +22,39 @@
 
         /* Navigation Header */
         header { width: 100%; border-bottom: 1px solid var(--border-color); background: var(--pure-white); position: sticky; top: 0; z-index: 1000; }
-        .nav-container { max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; padding: 1rem 2rem; }
-        .logo { font-size: 1.35rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.05em; }
-        .logo span { font-weight: 400; color: var(--secondary-gray); font-size: 0.9rem; text-transform: none; }
+        .nav-container { max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; padding: 1rem 2rem; position: relative; }
+        .logo { font-size: 1.35rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.05em; line-height: 1.2; z-index: 1001; }
+        .logo span { font-weight: 400; color: var(--secondary-gray); font-size: 0.9rem; text-transform: none; display: inline-block; }
         
-        /* Dropdown Menu Mechanics */
-        .nav-menu { display: flex; list-style: none; }
+        /* Mobile Menu Toggle Button */
+        .menu-toggle { display: none; background: none; border: none; font-size: 1.5rem; cursor: pointer; color: var(--primary-dark); z-index: 1001; padding: 0.5rem; }
+
+        /* CSS Dropdown Menu Mechanics */
+        .nav-menu { display: flex; list-style: none; align-items: center; }
         .nav-item { position: relative; padding: 0.5rem 1rem; }
-        .nav-link { font-size: 0.95rem; font-weight: 600; color: var(--secondary-gray); cursor: pointer; transition: color 0.2s; }
+        .nav-link { font-size: 0.95rem; font-weight: 600; color: var(--secondary-gray); cursor: pointer; user-select: none; transition: color 0.2s; display: flex; align-items: center; gap: 0.25rem; }
         .nav-link:hover { color: var(--primary-dark); }
-        .nav-item:hover .dropdown-menu { display: block; opacity: 1; visibility: visible; }
+        
+        /* Interactive click-activation class for submenus */
+        .nav-item.open-active .dropdown-menu { display: block; opacity: 1; visibility: visible; }
         
         .dropdown-menu { 
             display: none; position: absolute; top: 100%; left: 0; background: var(--pure-white); 
             border: 1px solid var(--border-color); box-shadow: 0 4px 12px rgba(0,0,0,0.05); 
             list-style: none; min-width: 280px; padding: 0.5rem 0; margin-top: 0.5rem; border-radius: 4px;
         }
-        .dropdown-menu li a { display: block; padding: 0.6rem 1.2rem; font-size: 0.9rem; color: var(--secondary-gray); font-weight: 500; }
+        .dropdown-menu li a { display: block; padding: 0.6rem 1.2rem; font-size: 0.9rem; color: var(--secondary-gray); font-weight: 500; transition: background 0.2s; }
         .dropdown-menu li a:hover { background-color: var(--light-gray); color: var(--primary-dark); }
 
         /* Hero Layout */
         .solution-hero { max-width: 1200px; margin: 0 auto; padding: 5rem 2rem 3rem; border-bottom: 1px solid var(--border-color); }
-        .solution-hero h1 { font-size: 3rem; line-height: 1.15; margin-bottom: 1.5rem; }
-        .solution-hero p { font-size: 1.2rem; color: var(--secondary-gray); max-width: 850px; }
+        .solution-hero h1 { font-size: clamp(2rem, 5vw, 3rem); line-height: 1.15; margin-bottom: 1.5rem; }
+        .solution-hero p { font-size: clamp(1.05rem, 2vw, 1.2rem); color: var(--secondary-gray); max-width: 850px; }
 
         .content-container { max-width: 1200px; margin: 5rem auto; padding: 0 2rem; display: grid; grid-template-columns: 2fr 1fr; gap: 4rem; }
         
         /* Core Content */
+        .main-content { min-width: 0; }
         .main-content h2 { font-size: 1.8rem; margin-bottom: 1.5rem; }
         .main-content p { font-size: 1.05rem; color: var(--secondary-gray); margin-bottom: 2rem; }
         
@@ -58,7 +70,7 @@
 
         /* Sidebar Elements */
         .specs-sidebar { display: flex; flex-direction: column; gap: 2rem; }
-        .spec-box { border: 1px solid var(--border-color); padding: 2rem; border-radius: 4px; }
+        .spec-box { border: 1px solid var(--border-color); padding: 2rem; border-radius: 4px; background: var(--pure-white); }
         .spec-box h3 { font-size: 1rem; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 1rem; }
         .spec-box ul { list-style: none; }
         .spec-box ul li { font-size: 0.9rem; color: var(--secondary-gray); padding: 0.5rem 0; border-bottom: 1px solid var(--light-gray); }
@@ -75,16 +87,35 @@
         .footer-procurement-block h4 { color: var(--primary-dark); font-size: 1rem; margin-bottom: 0.8rem; text-transform: uppercase; }
         .footer-procurement-block p { font-size: 0.85rem; margin-bottom: 0.5rem; line-height: 1.5; }
         
-        .footer-bottom { max-width: 1200px; margin: 2rem auto 0; padding-top: 1.5rem; border-top: 1px solid var(--border-color); display: flex; justify-content: space-between; flex-wrap: wrap; font-size: 0.8rem; color: var(--secondary-gray); }
-        .footer-bottom a { margin-left: 1rem; text-decoration: underline; }
+        .footer-bottom { max-width: 1200px; margin: 2rem auto 0; padding-top: 1.5rem; border-top: 1px solid var(--border-color); display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; font-size: 0.8rem; color: var(--secondary-gray); }
+        .footer-bottom div { display: flex; gap: 1rem; }
+        .footer-bottom a { text-decoration: underline; }
 
-        @media (max-width: 992px) { .content-container { grid-template-columns: 1fr; gap: 3rem; } }
-        @media (max-width: 768px) {
-            .nav-container { flex-direction: column; gap: 1rem; text-align: center; }
-            .nav-menu { flex-wrap: wrap; justify-content: center; }
-            .solution-hero h1 { font-size: 2.25rem; }
-            .dropdown-menu { position: static; box-shadow: none; border: none; padding-left: 1rem; min-width: 100%; display: block; opacity: 1; visibility: visible; }
-            .footer-bottom { flex-direction: column; gap: 1rem; text-align: center; }
+        /* Responsive Design Rules - Viewport Adjustments */
+        @media (max-width: 991px) {
+            .menu-toggle { display: block; }
+            .nav-container { padding: 1rem 1.5rem; }
+            
+            .nav-menu { 
+                display: none; position: absolute; top: 100%; left: 0; width: 100%; 
+                background: var(--pure-white); border-bottom: 1px solid var(--border-color);
+                flex-direction: column; align-items: stretch; padding: 1rem 0; max-height: 75vh; overflow-y: auto;
+            }
+            .nav-menu.active { display: flex; }
+            .nav-item { padding: 0.5rem 1.5rem; }
+            .nav-link { justify-content: space-between; padding: 0.5rem 0; width: 100%; }
+            
+            /* Mobile Dropdown Interactions */
+            .nav-item.open-active .dropdown-menu { display: block; position: static; box-shadow: none; border: none; padding-left: 1rem; width: 100%; margin-top: 0.25rem; }
+
+            .content-container { grid-template-columns: 1fr; gap: 3rem; padding: 0 1.5rem; margin: 3.5rem auto; }
+            .solution-hero { padding: 4rem 1.5rem 2rem; }
+            .infra-callout { padding: 1.5rem; }
+            footer { padding: 3rem 1.5rem 1.5rem; margin-top: 5rem; }
+        }
+
+        @media (max-width: 480px) {
+            .footer-bottom { flex-direction: column; text-align: center; align-items: center; }
         }
     </style>
 </head>
@@ -94,9 +125,10 @@
     <header>
         <nav class="nav-container">
             <div class="logo">Solomon Kin LLC <br><span>via REALAiID.com</span></div>
-            <ul class="nav-menu">
+            <button class="menu-toggle" aria-label="Toggle Menu" onclick="toggleMobileMenu()">☰</button>
+            <ul class="nav-menu" id="navMenu">
                 <li class="nav-item"><a href="../index.html" class="nav-link">Home</a></li>
-                <li class="nav-item">
+                <li class="nav-item" onclick="toggleDropdown(this, event)">
                     <span class="nav-link">About Us ▾</span>
                     <ul class="dropdown-menu">
                         <li><a href="../about/profile.html">Corporate Profile & Personnel</a></li>
@@ -104,26 +136,26 @@
                         <li><a href="../about/partnerships.html">Strategic Non-Profit Network</a></li>
                     </ul>
                 </li>
-                <li class="nav-item">
+                <li class="nav-item" onclick="toggleDropdown(this, event)">
                     <span class="nav-link">Core Divisions ▾</span>
                     <ul class="dropdown-menu">
-                        <li><a href="identity-forensics.html">High-Assurance IDV & Forensics</a></li>
-                        <li><a href="../records-governance/employee-hr.html">Records Keeping & HR Information Systems</a></li>
-                        <li><a href="behavioral-health.html">Forensic Behavioral Health Tech</a></li>
+                        <li><a href="identity-forensics.html">Identity Verification & Forensics</a></li>
+                        <li><a href="../records-governance/employee-hr.html">Records Keeping & HRIS</a></li>
+                        <li><a href="behavioral-health.html">Forensic Behavioral Tech</a></li>
                         <li><a href="autonomous-transport.html">Transport Safety Analytics</a></li>
                         <li><a href="student-loans.html">Student Financial Counseling</a></li>
                         <li><a href="it-cybersecurity.html">IT Systems & Cybersecurity</a></li>
                         <li><a href="workforce-hr.html">Workforce Supply & Compliance</a></li>
                     </ul>
                 </li>
-                <li class="nav-item">
+                <li class="nav-item" onclick="toggleDropdown(this, event)">
                     <span class="nav-link">Asset Leasing ▾</span>
                     <ul class="dropdown-menu">
                         <li><a href="../leasing/industrial-machinery.html">Heavy Machinery Rental</a></li>
                         <li><a href="../leasing/tech-hardware.html">Technology Hardware Assets</a></li>
                     </ul>
                 </li>
-                <li class="nav-item">
+                <li class="nav-item" onclick="toggleDropdown(this, event)">
                     <span class="nav-link">Procurement ▾</span>
                     <ul class="dropdown-menu">
                         <li><a href="../procurement/capability-statement.html">Capability Statement</a></li>
@@ -204,7 +236,7 @@
                 <ul>
                     <li><strong>Architecture:</strong> Zero-Trust Network Fabric</li>
                     <li><strong>Audit Loop:</strong> Permanent Access Verification</li>
-                    <li><strong>Integrity:</strong> Cryptographic Provenance Ledgers</li>
+                    <li><strong>Identity:</strong> Cryptographic Provenance Ledgers</li>
                     <li><strong>Data Isolation:</strong> FERPA / HIPAA Capable</li>
                 </ul>
             </div>
@@ -263,5 +295,37 @@
         </div>
     </footer>
 
+    <!-- Logic Engine for Cross-Device Interface Click Mechanics -->
+    <script>
+        function toggleMobileMenu() {
+            var menu = document.getElementById('navMenu');
+            menu.classList.toggle('active');
+        }
+
+        function toggleDropdown(element, event) {
+            if (event.target.tagName === 'A') return;
+            
+            event.preventDefault();
+            event.stopPropagation();
+            
+            var isActive = element.classList.contains('open-active');
+            
+            document.querySelectorAll('.nav-item').forEach(function(item) {
+                item.classList.remove('open-active');
+            });
+            
+            if (!isActive) {
+                element.classList.add('open-active');
+            }
+        }
+
+        window.addEventListener('click', function(e) {
+            if (!e.target.closest('.nav-item')) {
+                document.querySelectorAll('.nav-item').forEach(function(item) {
+                    item.classList.remove('open-active');
+                });
+            }
+        });
+    </script>
 </body>
 </html>
