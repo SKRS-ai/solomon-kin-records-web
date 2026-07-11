@@ -7,8 +7,14 @@
     <style>
         /* Base Reset & Variables */
         * { box-sizing: border-box; margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; }
-        :root { --primary-dark: #111111; --secondary-gray: #444444; --light-gray: #f5f5f5; --border-color: #dddddd; --pure-white: #ffffff; }
-        body { background-color: var(--pure-white); color: var(--primary-dark); line-height: 1.6; }
+        :root { 
+            --primary-dark: #111111; 
+            --secondary-gray: #444444; 
+            --light-gray: #f5f5f5; 
+            --border-color: #dddddd; 
+            --pure-white: #ffffff; 
+        }
+        body { background-color: var(--pure-white); color: var(--primary-dark); line-height: 1.6; -webkit-font-smoothing: antialiased; }
         a { text-decoration: none; color: inherit; }
 
         /* Typography */
@@ -16,31 +22,38 @@
 
         /* Navigation Header */
         header { width: 100%; border-bottom: 1px solid var(--border-color); background: var(--pure-white); position: sticky; top: 0; z-index: 1000; }
-        .nav-container { max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; padding: 1rem 2rem; }
-        .logo { font-size: 1.35rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.05em; }
-        .logo span { font-weight: 400; color: var(--secondary-gray); font-size: 0.9rem; text-transform: none; }
+        .nav-container { max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; padding: 1rem 2rem; position: relative; }
+        .logo { font-size: 1.35rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.05em; line-height: 1.2; z-index: 1001; }
+        .logo span { font-weight: 400; color: var(--secondary-gray); font-size: 0.9rem; text-transform: none; display: inline-block; }
         
+        /* Mobile Menu Toggle Button */
+        .menu-toggle { display: none; background: none; border: none; font-size: 1.5rem; cursor: pointer; color: var(--primary-dark); z-index: 1001; padding: 0.5rem; }
+
         /* CSS Dropdown Menu Mechanics */
-        .nav-menu { display: flex; list-style: none; }
+        .nav-menu { display: flex; list-style: none; align-items: center; }
         .nav-item { position: relative; padding: 0.5rem 1rem; }
-        .nav-link { font-size: 0.95rem; font-weight: 600; color: var(--secondary-gray); cursor: pointer; transition: color 0.2s; }
+        .nav-link { font-size: 0.95rem; font-weight: 600; color: var(--secondary-gray); cursor: pointer; transition: color 0.2s; display: flex; align-items: center; gap: 0.25rem; }
         .nav-link:hover { color: var(--primary-dark); }
-        .nav-item:hover .dropdown-menu { display: block; opacity: 1; visibility: visible; }
+        
+        /* Hover triggers for Desktop viewports */
+        @media (min-width: 992px) {
+            .nav-item:hover .dropdown-menu { display: block; opacity: 1; visibility: visible; }
+        }
         
         .dropdown-menu { 
             display: none; position: absolute; top: 100%; left: 0; background: var(--pure-white); 
             border: 1px solid var(--border-color); box-shadow: 0 4px 12px rgba(0,0,0,0.05); 
             list-style: none; min-width: 280px; padding: 0.5rem 0; margin-top: 0.5rem; border-radius: 4px;
         }
-        .dropdown-menu li a { display: block; padding: 0.6rem 1.2rem; font-size: 0.9rem; color: var(--secondary-gray); font-weight: 500; }
+        .dropdown-menu li a { display: block; padding: 0.6rem 1.2rem; font-size: 0.9rem; color: var(--secondary-gray); font-weight: 500; transition: background 0.2s; }
         .dropdown-menu li a:hover { background-color: var(--light-gray); color: var(--primary-dark); }
 
         /* Hero Section */
         .hero { max-width: 1200px; margin: 0 auto; padding: 6rem 2rem; text-align: left; border-bottom: 1px solid var(--border-color); }
-        .hero h1 { font-size: 3.25rem; line-height: 1.15; margin-bottom: 1.5rem; max-width: 900px; }
-        .hero p { font-size: 1.2rem; color: var(--secondary-gray); max-width: 800px; margin-bottom: 2.5rem; }
-        .cta-group { display: flex; gap: 1rem; }
-        .btn { padding: 0.8rem 1.8rem; font-size: 0.95rem; font-weight: 600; border-radius: 4px; border: 1px solid var(--primary-dark); cursor: pointer; transition: all 0.2s; }
+        .hero h1 { font-size: clamp(2.25rem, 5vw, 3.25rem); line-height: 1.15; margin-bottom: 1.5rem; max-width: 900px; }
+        .hero p { font-size: clamp(1.05rem, 2vw, 1.2rem); color: var(--secondary-gray); max-width: 800px; margin-bottom: 2.5rem; }
+        .cta-group { display: flex; flex-wrap: wrap; gap: 1rem; }
+        .btn { padding: 0.8rem 1.8rem; font-size: 0.95rem; font-weight: 600; border-radius: 4px; border: 1px solid var(--primary-dark); cursor: pointer; transition: all 0.2s; text-align: center; }
         .btn-primary { background-color: var(--primary-dark); color: var(--pure-white); }
         .btn-primary:hover { background-color: #333333; }
         .btn-secondary { background-color: var(--pure-white); color: var(--primary-dark); }
@@ -57,17 +70,17 @@
         .section-header::after { content: ''; position: absolute; bottom: 0; left: 0; width: 60px; height: 2px; background: var(--primary-dark); }
 
         /* Core Capabilities Matrix (Grid) */
-        .matrix-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(340px, 1fr)); gap: 2rem; }
-        .matrix-card { border: 1px solid var(--border-color); padding: 2rem; border-radius: 4px; transition: transform 0.2s, box-shadow 0.2s; }
+        .matrix-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 2rem; }
+        .matrix-card { border: 1px solid var(--border-color); padding: 2rem; border-radius: 4px; transition: transform 0.2s, box-shadow 0.2s; background: var(--pure-white); }
         .matrix-card:hover { transform: translateY(-2px); box-shadow: 0 4px 12px rgba(0,0,0,0.02); }
-        .matrix-card h3 { font-size: 1.3rem; margin-bottom: 1rem; display: flex; align-items: center; gap: 0.5rem; }
+        .matrix-card h3 { font-size: 1.3rem; margin-bottom: 1rem; display: flex; align-items: center; flex-wrap: wrap; gap: 0.5rem; }
         .matrix-card p { color: var(--secondary-gray); font-size: 0.95rem; margin-bottom: 1rem; }
         .matrix-card ul { list-style: square; padding-left: 1.2rem; color: var(--secondary-gray); font-size: 0.9rem; }
         .matrix-card ul li { margin-bottom: 0.4rem; }
 
         /* Partnerships & Ecosystem Split layout */
         .ecosystem-layout { display: flex; flex-direction: column; gap: 2rem; }
-        .ecosystem-block { border: 1px solid var(--border-color); padding: 2.5rem; border-radius: 4px; }
+        .ecosystem-block { border: 1px solid var(--border-color); padding: 2.5rem; border-radius: 4px; background: var(--pure-white); }
         .ecosystem-block h3 { margin-bottom: 0.5rem; font-size: 1.4rem; }
         .ecosystem-subtitle { font-size: 0.9rem; color: var(--secondary-gray); font-weight: 600; margin-bottom: 1rem; text-transform: uppercase; }
         .ecosystem-block p { font-size: 1rem; color: var(--secondary-gray); margin-bottom: 1rem; }
@@ -83,17 +96,39 @@
         .footer-procurement-block h4 { color: var(--primary-dark); font-size: 1rem; margin-bottom: 0.8rem; text-transform: uppercase; }
         .footer-procurement-block p { font-size: 0.85rem; margin-bottom: 0.5rem; line-height: 1.5; }
         
-        .footer-bottom { max-width: 1200px; margin: 2rem auto 0; padding-top: 1.5rem; border-top: 1px solid var(--border-color); display: flex; justify-content: space-between; flex-wrap: wrap; font-size: 0.8rem; color: var(--secondary-gray); }
-        .footer-bottom a { margin-left: 1rem; text-decoration: underline; }
+        .footer-bottom { max-width: 1200px; margin: 2rem auto 0; padding-top: 1.5rem; border-top: 1px solid var(--border-color); display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; font-size: 0.8rem; color: var(--secondary-gray); }
+        .footer-bottom div { display: flex; gap: 1rem; }
+        .footer-bottom a { text-decoration: underline; }
 
-        /* Responsive Design Rules */
-        @media (max-width: 768px) {
-            .nav-container { flex-direction: column; gap: 1rem; text-align: center; }
-            .nav-menu { flex-wrap: wrap; justify-content: center; }
-            .hero h1 { font-size: 2.25rem; }
-            .dropdown-menu { position: static; box-shadow: none; border: none; padding-left: 1rem; min-width: 100%; display: block; opacity: 1; visibility: visible; }
-            .footer-bottom { flex-direction: column; gap: 1rem; text-align: center; }
-            .footer-bottom div { margin-top: 0.5rem; }
+        /* Responsive Design Rules - Desktop Boundary Optimization */
+        @media (max-width: 991px) {
+            .menu-toggle { display: block; }
+            .nav-container { padding: 1rem 1.5rem; }
+            
+            .nav-menu { 
+                display: none; position: absolute; top: 100%; left: 0; width: 100%; 
+                background: var(--pure-white); border-bottom: 1px solid var(--border-color);
+                flex-direction: column; align-items: stretch; padding: 1rem 0; max-height: 75vh; overflow-y: auto;
+            }
+            .nav-menu.active { display: flex; }
+            .nav-item { padding: 0.5rem 1.5rem; }
+            .nav-link { justify-content: space-between; padding: 0.5rem 0; width: 100%; }
+            
+            /* Responsive Dropdown Actions */
+            .nav-item.active-click .dropdown-menu { display: block; position: static; visibility: visible; opacity: 1; box-shadow: none; border: none; padding-left: 1rem; width: 100%; margin-top: 0.25rem; }
+            
+            .hero { padding: 4rem 1.5rem; }
+            .pipeline-notice { margin: 2rem 1.5rem 0; padding: 1.25rem 1.5rem; }
+            .section-container { margin: 3.5rem auto; padding: 0 1.5rem; }
+            .section-header { margin-bottom: 2rem; }
+            .matrix-grid { gap: 1.5rem; }
+            .ecosystem-block { padding: 1.75rem; }
+            footer { padding: 3rem 1.5rem 1.5rem; margin-top: 5rem; }
+        }
+
+        @media (max-width: 480px) {
+            .cta-group .btn { width: 100%; }
+            .footer-bottom { flex-direction: column; text-align: center; align-items: center; }
         }
     </style>
 </head>
@@ -103,9 +138,10 @@
     <header>
         <nav class="nav-container">
             <div class="logo">Solomon Kin LLC <br><span>via REALAiID.com</span></div>
-            <ul class="nav-menu">
+            <button class="menu-toggle" aria-label="Toggle Menu" onclick="toggleMobileMenu()">☰</button>
+            <ul class="nav-menu" id="navMenu">
                 <li class="nav-item"><a href="index.html" class="nav-link">Home</a></li>
-                <li class="nav-item">
+                <li class="nav-item" onclick="toggleDropdown(this, event)">
                     <span class="nav-link">About Us ▾</span>
                     <ul class="dropdown-menu">
                         <li><a href="about/profile.html">Corporate Profile & Personnel</a></li>
@@ -113,7 +149,7 @@
                         <li><a href="about/partnerships.html">Strategic Non-Profit Network</a></li>
                     </ul>
                 </li>
-                <li class="nav-item">
+                <li class="nav-item" onclick="toggleDropdown(this, event)">
                     <span class="nav-link">Core Divisions ▾</span>
                     <ul class="dropdown-menu">
                         <li><a href="solutions/identity-forensics.html">High-Assurance IDV & Forensics</a></li>
@@ -125,14 +161,14 @@
                         <li><a href="solutions/workforce-hr.html">Workforce Supply & Compliance</a></li>
                     </ul>
                 </li>
-                <li class="nav-item">
+                <li class="nav-item" onclick="toggleDropdown(this, event)">
                     <span class="nav-link">Asset Leasing ▾</span>
                     <ul class="dropdown-menu">
                         <li><a href="leasing/industrial-machinery.html">Heavy Machinery Rental</a></li>
                         <li><a href="leasing/tech-hardware.html">Technology Hardware Assets</a></li>
                     </ul>
                 </li>
-                <li class="nav-item">
+                <li class="nav-item" onclick="toggleDropdown(this, event)">
                     <span class="nav-link">Procurement ▾</span>
                     <ul class="dropdown-menu">
                         <li><a href="procurement/capability-statement.html">Capability Statement</a></li>
@@ -277,5 +313,33 @@
         </div>
     </footer>
 
+    <!-- Logic Engine for Responsive Interfaces -->
+    <script>
+        function toggleMobileMenu() {
+            var menu = document.getElementById('navMenu');
+            menu.classList.toggle('active');
+        }
+
+        function toggleDropdown(element, event) {
+            if (window.innerWidth <= 991) {
+                // If the click is coming directly from a link inside the dropdown, do not toggle accordion.
+                if (event.target.tagName === 'A') return;
+                
+                event.preventDefault();
+                event.stopPropagation();
+                
+                var isActive = element.classList.contains('active-click');
+                
+                // Close all other instances
+                document.querySelectorAll('.nav-item').forEach(function(item) {
+                    item.classList.remove('active-click');
+                });
+                
+                if (!isActive) {
+                    element.classList.add('active-click');
+                }
+            }
+        }
+    </script>
 </body>
 </html>
