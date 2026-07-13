@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Electronic Press Kit (EPK) — Solomon Kin LLC</title>
+    <style>
+        /* Base Reset & Variables */
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; }
+        :root { 
+            --primary-dark: #111111; 
+            --secondary-gray: #444444; 
+            --light-gray: #f5f5f5; 
+            --border-color: #dddddd; 
+            --pure-white: #ffffff; 
+        }
+        body { background-color: var(--pure-white); color: var(--primary-dark); line-height: 1.6; -webkit-font-smoothing: antialiased; }
+        a { text-decoration: none; color: inherit; }
+
+        /* Typography */
+        h1, h2, h3, h4 { font-weight: 700; color: var(--primary-dark); letter-spacing: -0.02em; }
+
+        /* Navigation Header */
+        header { width: 100%; border-bottom: 1px solid var(--border-color); background: var(--pure-white); position: sticky; top: 0; z-index: 1000; }
+        .nav-container { max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; padding: 1rem 2rem; position: relative; }
+        .logo { font-size: 1.35rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.05em; line-height: 1.2; z-index: 1001; }
+        .logo span { font-weight: 400; color: var(--secondary-gray); font-size: 0.9rem; text-transform: none; display: inline-block; }
+        
+        /* Mobile Menu Toggle Button */
+        .menu-toggle { display: none; background: none; border: none; font-size: 1.5rem; cursor: pointer; color: var(--primary-dark); z-index: 1001; padding: 0.5rem; }
+
+        /* CSS Dropdown Menu Mechanics */
+        .nav-menu { display: flex; list-style: none; align-items: center; }
+        .nav-item { position: relative; padding: 0.5rem 1rem; }
+        .nav-link { font-size: 0.95rem; font-weight: 600; color: var(--secondary-gray); cursor: pointer; user-select: none; transition: color 0.2s; display: flex; align-items: center; gap: 0.25rem; }
+        .nav-link:hover { color: var(--primary-dark); }
+        
+        /* Interactive click-activation class for submenus */
+        .nav-item.open-active .dropdown-menu { display: block; opacity: 1; visibility: visible; }
+        
+        .dropdown-menu { 
+            display: none; position: absolute; top: 100%; left: 0; background: var(--pure-white); 
+            border: 1px solid var(--border-color); box-shadow: 0 4px 12px rgba(0,0,0,0.05); 
+            list-style: none; min-width: 280px; padding: 0.5rem 0; margin-top: 0.5rem; border-radius: 4px;
+        }
+        .dropdown-menu li a { display: block; padding: 0.6rem 1.2rem; font-size: 0.9rem; color: var(--secondary-gray); font-weight: 500; transition: background 0.2s; }
+        .dropdown-menu li a:hover { background-color: var(--light-gray); color: var(--primary-dark); }
+
+        /* Hero Layout */
+        .press-hero { max-width: 1200px; margin: 0 auto; padding: 5rem 2rem 3rem; border-bottom: 1px solid var(--border-color); }
+        .press-hero h1 { font-size: clamp(2rem, 5vw, 3rem); line-height: 1.15; margin-bottom: 1.5rem; }
+        .press-hero p { font-size: clamp(1.05rem, 2vw, 1.2rem); color: var(--secondary-gray); max-width: 850px; }
+
+        .content-container { max-width: 1200px; margin: 5rem auto; padding: 0 2rem; display: grid; grid-template-columns: 2fr 1fr; gap: 4rem; }
+        
+        /* Core Media Releases */
+        .main-content { min-width: 0; }
+        .main-content h2 { font-size: 1.8rem; margin-bottom: 1.5rem; }
+        .main-content p { font-size: 1.05rem; color: var(--secondary-gray); margin-bottom: 2rem; }
+        
+        .press-block { margin-bottom: 3.5rem; border-bottom: 1px solid var(--light-gray); padding-bottom: 2rem; }
+        .press-block:last-of-type { border-bottom: none; }
+        .press-meta { font-family: monospace; font-size: 0.85rem; font-weight: 700; color: var(--secondary-gray); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 0.5rem; }
+        .press-block h3 { font-size: 1.4rem; margin-bottom: 1rem; line-height: 1.3; }
+        .press-block p { font-size: 1rem; color: var(--secondary-gray); margin-bottom: 1rem; }
+
+        /* Asset Download Box */
+        .download-box { background: var(--light-gray); padding: 2rem; border-radius: 4px; border: 1px solid var(--border-color); margin: 3.5rem 0; }
+        .download-box h4 { font-size: 1.1rem; margin-bottom: 1rem; text-transform: uppercase; letter-spacing: 0.02em; }
+        .download-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; }
+        .download-item { display: flex; align-items: center; justify-content: space-between; background: var(--pure-white); padding: 0.75rem 1rem; border: 1px solid var(--border-color); border-radius: 3px; font-size: 0.9rem; font-weight: 600; }
+        .download-item a { text-decoration: underline; color: var(--primary-dark); }
+
+        /* Sidebar Elements */
+        .specs-sidebar { display: flex; flex-direction: column; gap: 2rem; }
+        .spec-box { border: 1px solid var(--border-color); padding: 2rem; border-radius: 4px; background: var(--pure-white); }
+        .spec-box h3 { font-size: 1rem; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 1rem; }
+        .spec-box ul { list-style: none; }
+        .spec-box ul li { font-size: 0.9rem; color: var(--secondary-gray); padding: 0.5rem 0; border-bottom: 1px solid var(--light-gray); }
+        .spec-box ul li strong { color: var(--primary-dark); }
+
+        /* Production Global Footer */
+        footer { background-color: var(--light-gray); border-top: 1px solid var(--border-color); padding: 4rem 2rem 2rem; font-size: 0.9rem; margin-top: 8rem; }
+        .footer-grid { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 2.5rem; }
+        .footer-col h4 { font-size: 1rem; margin-bottom: 1.2rem; text-transform: uppercase; letter-spacing: 0.05em; }
+        .footer-col a { display: block; color: var(--secondary-gray); margin-bottom: 0.6rem; font-size: 0.85rem; transition: color 0.2s; }
+        .footer-col a:hover { color: var(--primary-dark); }
+        
+        .footer-procurement-block { max-width: 1200px; margin: 3rem auto 0; padding-top: 2rem; border-top: 1px solid var(--border-color); color: var(--secondary-gray); }
+        .footer-procurement-block h4 { color: var(--primary-dark); font-size: 1rem; margin-bottom: 0.8rem; text-transform: uppercase; }
+        .footer-procurement-block p { font-size: 0.85rem; margin-bottom: 0.5rem; line-height: 1.5; }
+        
+        .footer-bottom { max-width: 1200px; margin: 2rem auto 0; padding-top: 1.5rem; border-top: 1px solid var(--border-color); display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; font-size: 0.8rem; color: var(--secondary-gray); }
+        .footer-bottom div { display: flex; gap: 1rem; }
+        .footer-bottom a { text-decoration: underline; }
+
+        /* Responsive Design Rules - Viewport Adjustments */
+        @media (max-width: 991px) {
+            .menu-toggle { display: block; }
+            .nav-container { padding: 1rem 1.5rem; }
+            
+            .nav-menu { 
+                display: none; position: absolute; top: 100%; left: 0; width: 100%; 
+                background: var(--pure-white); border-bottom: 1px solid var(--border-color);
+                flex-direction: column; align-items: stretch; padding: 1rem 0; max-height: 75vh; overflow-y: auto;
+            }
+            .nav-menu.active { display: flex; }
+            .nav-item { padding: 0.5rem 1.5rem; }
+            .nav-link { justify-content: space-between; padding: 0.5rem 0; width: 100%; }
+            
+            /* Mobile Dropdown Interactions */
+            .nav-item.open-active .dropdown-menu { display: block; position: static; box-shadow: none; border: none; padding-left: 1rem; width: 100%; margin-top: 0.25rem; }
+
+            .content-container { grid-template-columns: 1fr; gap: 3rem; padding: 0 1.5rem; margin: 3.5rem auto; }
+            .press-hero { padding: 4rem 1.5rem 2rem; }
+            .download-box { padding: 1.5rem; }
+            footer { padding: 3rem 1.5rem 1.5rem; margin-top: 5rem; }
+        }
+
+        @media (max-width: 480px) {
+            .footer-bottom { flex-direction: column; text-align: center; align-items: center; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header / Navigation Menu Ecosystem -->
+    <header>
+        <nav class="nav-container">
+            <div class="logo">Solomon Kin LLC <br><span>via REALAiID.com</span></div>
+            <button class="menu-toggle" aria-label="Toggle Menu" onclick="toggleMobileMenu()">☰</button>
+            <ul class="nav-menu" id="navMenu">
+                <li class="nav-item"><a href="/index.html" class="nav-link">Home</a></li>
+                <li class="nav-item" onclick="toggleDropdown(this, event)">
+                    <span class="nav-link">About Us ▾</span>
+                    <ul class="dropdown-menu">
+                        <li><a href="/about/profile.html">Corporate Profile & Personnel</a></li>
+                        <li><a href="/about/credentials.html">Certifications & Identifiers</a></li>
+                        <li><a href="/about/partnerships.html">Strategic Non-Profit Network</a></li>
+                    </ul>
+                </li>
+                <li class="nav-item" onclick="toggleDropdown(this, event)">
+                    <span class="nav-link">Core Divisions ▾</span>
+                    <ul class="dropdown-menu">
+                        <li><a href="/solutions/identity-forensics.html">Identity Verification & Forensics</a></li>
+                        <li><a href="/records-governance/employee-hr.html">Records Keeping & HRIS</a></li>
+                        <li><a href="/solutions/behavioral-health.html">Forensic Behavioral Tech</a></li>
+                        <li><a href="/solutions/autonomous-transport.html">Transport Safety Analytics</a></li>
+                        <li><a href="/solutions/student-loans.html">Student Financial Counseling</a></li>
+                        <li><a href="/solutions/it-cybersecurity.html">IT Systems & Cybersecurity</a></li>
+                        <li><a href="/solutions/workforce-hr.html">Workforce Supply & Compliance</a></li>
+                    </ul>
+                </li>
+                <li class="nav-item" onclick="toggleDropdown(this, event)">
+                    <span class="nav-link">Asset Leasing ▾</span>
+                    <ul class="dropdown-menu">
+                        <li><a href="/leasing/industrial-machinery.html">Heavy Machinery Rental</a></li>
+                        <li><a href="/leasing/tech-hardware.html">Technology Hardware Assets</a></li>
+                    </ul>
+                </li>
+                <li class="nav-item" onclick="toggleDropdown(this, event)">
+                    <span class="nav-link">Innovation ▾</span>
+                    <ul class="dropdown-menu">
+                        <li><a href="/projects.html">Innovation Portfolio Matrix</a></li>
+                        <li><a href="/innovation/autonomous-waze.html">Autonomous Waze Propulsion</a></li>
+                        <li><a href="/innovation/terra.html">Terra Automated Logistics</a></li>
+                    </ul>
+                </li>
+                <li class="nav-item"><a href="/media/documentary-vault.html" class="nav-link">Media Vault</a></li>
+                <li class="nav-item"><a href="/contact.html" class="nav-link">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Press Kit Hero Block -->
+    <section class="press-hero">
+        <h1>Electronic Press Kit (EPK) &amp; Public Relations</h1>
+        <p>The official public transparency portal for Solomon Kin LLC. Access verified press releases, media briefs, downloadable engineering schemas, and strategic alliance updates.</p>
+    </section>
+
+    <!-- Main Content Frame -->
+    <main class="content-container">
+        
+        <!-- Left Column: Official Releases -->
+        <div class="main-content">
+            <h2>Official Media Statements &amp; Project Announcements</h2>
+            <p>Solomon Kin LLC maintains corporate transparency throughout all physical civil engineering modifications, software trust deployments, and regional multi-modal supply chain collaborations. Review verified programmatic announcements below.</p>
+            
+            <!-- Press Release 1: Autonomous Waze Announcement -->
+            <div class="press-block">
+                <div class="press-meta">Released: July 2026 &nbsp;|&nbsp; Category: Infrastructure</div>
+                <h3>Solomon Kin LLC Unveils Autonomous Waze Sub-Surface Propulsion Track Concept</h3>
+                <p>PHILADELPHIA, PA — Solomon Kin LLC announced today the technical framework mapping of its sub-surface high-speed hydro-propulsion transport loop corridor, designed to alleviate commercial vehicle miles traveled along the crowded landside corridors of the Mid-Atlantic. Sited strategically within navigable waters along the federal M-95 Marine Highway Route, the low-friction fluidic capsule system creates an entirely isolated, weather-resistant supply chain rail alternative[cite: 1]. System trials using un-crewed automated bots are scheduled to execute at active port terminal environments[cite: 1].</p>
+            </div>
+
+            <!-- Press Release 2: ARC Engineering Breakthrough -->
+            <div class="press-block">
+                <div class="press-meta">Released: June 2026 &nbsp;|&nbsp; Category: Hardware Prototyping</div>
+                <h3>Development Commenced on Buoyant Autonomous Robotic Container (ARC) Prototype</h3>
+                <p>PHILADELPHIA, PA — Addressing a century-old stagnancy in intermodal shipping unit methodologies, the Terra Automated Logistics division has finalized technical design specifications for the Autonomous Robotic Container (ARC)[cite: 1]. Sited as a specialized equipment acquisition, the unit introduces multi-layered safety mechanisms including hydrostatic pressure immersion sensing, automated carbon dioxide ($CO_2$) floatation bladders, and low-Earth-orbit satellite tracking arrays to completely eliminate open-water cargo casualties[cite: 1]. The container utilizes universal machine-to-machine open protocols, allowing cross-platform robotics to autonomously execute secure docking operations[cite: 1].</p>
+            </div>
+
+            <!-- Press Release 3: Strategic Alliances -->
+            <div class="press-block">
+                <div class="press-meta">Released: March 2026 &nbsp;|&nbsp; Category: Community Partnerships</div>
+                <h3>Joint Operations Solidified with Strategic Regional Non-Profit Networks</h3>
+                <p>PHILADELPHIA, PA — Solomon Kin LLC has formalized technical operations partnerships with Thin Black and Brown Lines USA and the Koinonia Grace Foundation. These structural alignments bridge high-assurance digital systems engineering with active community-facing public health, credit literacy counseling, and economic equity programs. By handling underlying IT architectures and data compliance loops, Solomon Kin LLC locks in robust administrative transparency matching Title VI civil rights mandates.</p>
+            </div>
+
+            <!-- Asset Download Portal Component -->
+            <div class="download-box">
+                <h4>Media Asset Downloads</h4>
+                <div class="download-grid">
+                    <div class="download-item">
+                        <span>Corporate Logo Package</span>
+                        <a href="#download">ZIP (4.2 MB)</a>
+                    </div>
+                    <div class="download-item">
+                        <span>ARC Engineering Schema</span>
+                        <a href="#download">PDF (12.8 MB)</a>
+                    </div>
+                    <div class="download-item">
+                        <span>Propulsion Track Map</span>
+                        <a href="#download">PDF (8.5 MB)</a>
+                    </div>
+                    <div class="download-item">
+                        <span>B2G Capability Statement</span>
+                        <a href="/procurement/capability-statement.html">VIEW PAGE</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Right Column: Media Contacts & Fast Facts -->
+        <aside class="specs-sidebar">
+            
+            <div class="spec-box">
+                <h3>Media PMO Contacts</h3>
+                <ul>
+                    <li><strong>Communications Director:</strong> Project Management Office</li>
+                    <li><strong>Inquiry Email:</strong> <a href="mailto:solomonkinllc@gmail.com" style="text-decoration: underline;">solomonkinllc@gmail.com</a></li>
+                    <li><strong>Urgent Press Line:</strong> (215) 555-0199</li>
+                    <li><strong>Regional Presence:</strong> Philadelphia, PA</li>
+                </ul>
+            </div>
+
+            <div class="spec-box">
+                <h3>Corporate Fast Facts</h3>
+                <ul>
+                    <li><strong>Legal Entity:</strong> Solomon Kin LLC</li>
+                    <li><strong>Primary Technology Rail:</strong> REALAiID.com</li>
+                    <li><strong>Primary NAICS Code:</strong> 541512 (Computer Systems Design)</li>
+                    <li><strong>SAM.gov Registration:</strong> Active Status Verified</li>
+                    <li><strong>Business Profile:</strong> Minority Business Enterprise (MBE)</li>
+                </ul>
+            </div>
+
+        </aside>
+
+    </main>
+
+    <!-- Hard Procurement Global Data Footer -->
+    <footer>
+        <div class="footer-grid">
+            <div class="footer-col">
+                <h4>Corporate Profile</h4>
+                <a href="/about/profile.html">About Solomon Kin LLC</a>
+                <a href="/about/credentials.html">Certifications & Identifiers</a>
+                <a href="/about/partnerships.html">Strategic Non-Profit Network</a>
+            </div>
+            <div class="footer-col">
+                <h4>Operating Divisions</h4>
+                <a href="/solutions/identity-forensics.html">Identity Verification & Forensics</a>
+                <a href="/records-governance/employee-hr.html">Records Keeping & HRIS</a>
+                <a href="/solutions/behavioral-health.html">Forensic Behavioral Tech</a>
+                <a href="/solutions/autonomous-transport.html">Transport Safety Analytics</a>
+                <a href="/solutions/student-loans.html">Student Financial Counseling</a>
+                <a href="/solutions/it-cybersecurity.html">IT Systems & Cybersecurity</a>
+                <a href="/solutions/workforce-hr.html">Workforce Supply & Compliance</a>
+            </div>
+            <div class="footer-col">
+                <h4>Asset Leasing</h4>
+                <a href="/leasing/industrial-machinery.html">Heavy Machinery Rental</a>
+                <a href="/leasing/tech-hardware.html">Enterprise Technology Assets</a>
+            </div>
+            <div class="footer-col">
+                <h4>Procurement & B2G</h4>
+                <a href="/procurement/capability-statement.html">View Capability Statement</a>
+                <a href="/procurement/subcontracting.html">Subcontractor Portal</a>
+                <a href="/contact.html">Submit B2G Inquiry</a>
+            </div>
+        </div>
+
+        <div class="footer-procurement-block">
+            <h4>Federal, State & Municipal Contracting Registrations</h4>
+            <p><strong>Legal Entity:</strong> Solomon Kin LLC (via REALAiID.com) &nbsp;|&nbsp; <strong>Principal Investigator / CTO:</strong> Nehemiah M. Brown</p>
+            <p><strong>Unique Entity ID (UEI):</strong> H8YDYLEK6283 &nbsp;|&nbsp; <strong>EIN:</strong> 82-4565975 &nbsp;|&nbsp; <strong>DUNS:</strong> 145053632 &nbsp;|&nbsp; <strong>SBC ID:</strong> SBC_002678850</p>
+            <p><strong>Primary NAICS Classification:</strong> 541512 (Computer Systems Design Services)</p>
+            <p><strong>Core Capabilities Mapped:</strong> Enterprise Records Governance | Human Resource Information Systems (HRIS) | Identity Trust Frameworks | Digital Forensics | Heavy Machinery Fleet Leasing</p>
+            <p><strong>System Status:</strong> Active on SAM.gov | Minority Business Enterprise (MBE) Status Verified | Regional Presence: Philadelphia, PA</p>
+        </div>
+
+        <div class="footer-bottom">
+            <p>&copy; 2026 Solomon Kin LLC. All Rights Reserved. Executive Directives executed via REALAiID.com.</p>
+            <div>
+                <a href="/privacy-policy.html">Privacy Policy</a>
+                <a href="/terms-of-service.html">Terms of Procurement</a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Logic Engine for Cross-Device Interface Click Mechanics -->
+    <script>
+        function toggleMobileMenu() {
+            var menu = document.getElementById('navMenu');
+            menu.classList.toggle('active');
+        }
+
+        function toggleDropdown(element, event) {
+            if (event.target.tagName === 'A') return;
+            
+            event.preventDefault();
+            event.stopPropagation();
+            
+            var isActive = element.classList.contains('open-active');
+            
+            document.querySelectorAll('.nav-item').forEach(function(item) {
+                item.classList.remove('open-active');
+            });
+            
+            if (!isActive) {
+                element.classList.add('open-active');
+            }
+        }
+
+        window.addEventListener('click', function(e) {
+            if (!e.target.closest('.nav-item')) {
+                document.querySelectorAll('.nav-item').forEach(function(item) {
+                    item.classList.remove('open-active');
+                });
+            }
+        });
+    </script>
+</body>
+</html>
