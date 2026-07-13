@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Media &amp; Documentary Vault — Solomon Kin LLC</title>
+    <style>
+        /* Base Reset & Variables */
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; }
+        :root { 
+            --primary-dark: #111111; 
+            --secondary-gray: #444444; 
+            --light-gray: #f5f5f5; 
+            --border-color: #dddddd; 
+            --pure-white: #ffffff; 
+        }
+        body { background-color: var(--pure-white); color: var(--primary-dark); line-height: 1.6; -webkit-font-smoothing: antialiased; }
+        a { text-decoration: none; color: inherit; }
+
+        /* Typography */
+        h1, h2, h3, h4 { font-weight: 700; color: var(--primary-dark); letter-spacing: -0.02em; }
+
+        /* Navigation Header */
+        header { width: 100%; border-bottom: 1px solid var(--border-color); background: var(--pure-white); position: sticky; top: 0; z-index: 1000; }
+        .nav-container { max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; padding: 1rem 2rem; position: relative; }
+        .logo { font-size: 1.35rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.05em; line-height: 1.2; z-index: 1001; }
+        .logo span { font-weight: 400; color: var(--secondary-gray); font-size: 0.9rem; text-transform: none; display: inline-block; }
+        
+        /* Mobile Menu Toggle Button */
+        .menu-toggle { display: none; background: none; border: none; font-size: 1.5rem; cursor: pointer; color: var(--primary-dark); z-index: 1001; padding: 0.5rem; }
+
+        /* CSS Dropdown Menu Mechanics */
+        .nav-menu { display: flex; list-style: none; align-items: center; }
+        .nav-item { position: relative; padding: 0.5rem 1rem; }
+        .nav-link { font-size: 0.95rem; font-weight: 600; color: var(--secondary-gray); cursor: pointer; user-select: none; transition: color 0.2s; display: flex; align-items: center; gap: 0.25rem; }
+        .nav-link:hover { color: var(--primary-dark); }
+        
+        /* Interactive click-activation class for submenus */
+        .nav-item.open-active .dropdown-menu { display: block; opacity: 1; visibility: visible; }
+        
+        .dropdown-menu { 
+            display: none; position: absolute; top: 100%; left: 0; background: var(--pure-white); 
+            border: 1px solid var(--border-color); box-shadow: 0 4px 12px rgba(0,0,0,0.05); 
+            list-style: none; min-width: 280px; padding: 0.5rem 0; margin-top: 0.5rem; border-radius: 4px;
+        }
+        .dropdown-menu li a { display: block; padding: 0.6rem 1.2rem; font-size: 0.9rem; color: var(--secondary-gray); font-weight: 500; transition: background 0.2s; }
+        .dropdown-menu li a:hover { background-color: var(--light-gray); color: var(--primary-dark); }
+
+        /* Hero Layout */
+        .vault-hero { max-width: 1200px; margin: 0 auto; padding: 5rem 2rem 3rem; border-bottom: 1px solid var(--border-color); }
+        .vault-hero h1 { font-size: clamp(2rem, 5vw, 3rem); line-height: 1.15; margin-bottom: 1rem; }
+        .vault-hero p { font-size: clamp(1.05rem, 2vw, 1.2rem); color: var(--secondary-gray); max-width: 850px; }
+
+        /* Media Matrix Grid Layout */
+        .vault-container { max-width: 1200px; margin: 5rem auto; padding: 0 2rem; }
+        .vault-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 3rem; }
+        
+        .video-card { border: 1px solid var(--border-color); border-radius: 4px; background: var(--pure-white); overflow: hidden; display: flex; flex-direction: column; transition: border-color 0.2s; }
+        .video-card:hover { border-color: var(--primary-dark); }
+        
+        /* Simulated Video Player Embed Frame */
+        .video-player-frame { width: 100%; aspect-ratio: 16 / 9; background-color: #000000; position: relative; display: flex; align-items: center; justify-content: center; color: var(--pure-white); font-family: monospace; font-size: 0.9rem; letter-spacing: 0.05em; text-transform: uppercase; }
+        .video-player-frame::before { content: "▶"; font-size: 2.5rem; color: rgba(255,255,255,0.7); position: absolute; cursor: pointer; transition: color 0.2s, transform 0.2s; }
+        .video-player-frame:hover::before { color: var(--pure-white); transform: scale(1.1); }
+        
+        .video-info { padding: 2rem; flex-grow: 1; display: flex; flex-direction: column; justify-content: space-between; }
+        .video-meta { font-family: monospace; font-size: 0.8rem; font-weight: 700; color: var(--secondary-gray); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 0.5rem; }
+        .video-info h2 { font-size: 1.35rem; margin-bottom: 0.75rem; line-height: 1.2; }
+        .video-info p { font-size: 0.95rem; color: var(--secondary-gray); margin-bottom: 1.5rem; }
+        
+        .tech-tags { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+        .tech-tags span { font-family: monospace; font-size: 0.75rem; font-weight: 600; background: var(--light-gray); color: var(--primary-dark); padding: 0.25rem 0.5rem; border-radius: 3px; border: 1px solid var(--border-color); }
+
+        /* Production Global Footer */
+        footer { background-color: var(--light-gray); border-top: 1px solid var(--border-color); padding: 4rem 2rem 2rem; font-size: 0.9rem; margin-top: 8rem; }
+        .footer-grid { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 2.5rem; }
+        .footer-col h4 { font-size: 1rem; margin-bottom: 1.2rem; text-transform: uppercase; letter-spacing: 0.05em; }
+        .footer-col a { display: block; color: var(--secondary-gray); margin-bottom: 0.6rem; font-size: 0.85rem; transition: color 0.2s; }
+        .footer-col a:hover { color: var(--primary-dark); }
+        
+        .footer-procurement-block { max-width: 1200px; margin: 3rem auto 0; padding-top: 2rem; border-top: 1px solid var(--border-color); color: var(--secondary-gray); }
+        .footer-procurement-block h4 { color: var(--primary-dark); font-size: 1rem; margin-bottom: 0.8rem; text-transform: uppercase; }
+        .footer-procurement-block p { font-size: 0.85rem; margin-bottom: 0.5rem; line-height: 1.5; }
+        
+        .footer-bottom { max-width: 1200px; margin: 2rem auto 0; padding-top: 1.5rem; border-top: 1px solid var(--border-color); display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; font-size: 0.8rem; color: var(--secondary-gray); }
+        .footer-bottom div { display: flex; gap: 1rem; }
+        .footer-bottom a { text-decoration: underline; }
+
+        /* Responsive Adaptive Queries */
+        @media (max-width: 991px) {
+            .menu-toggle { display: block; }
+            .nav-container { padding: 1rem 1.5rem; }
+            
+            .nav-menu { 
+                display: none; position: absolute; top: 100%; left: 0; width: 100%; 
+                background: var(--pure-white); border-bottom: 1px solid var(--border-color);
+                flex-direction: column; align-items: stretch; padding: 1rem 0; max-height: 75vh; overflow-y: auto;
+            }
+            .nav-menu.active { display: flex; }
+            .nav-item { padding: 0.5rem 1.5rem; }
+            .nav-link { justify-content: space-between; padding: 0.5rem 0; width: 100%; }
+            
+            /* Mobile Submenu Expansion Styles */
+            .nav-item.open-active .dropdown-menu { display: block; position: static; box-shadow: none; border: none; padding-left: 1rem; width: 100%; margin-top: 0.25rem; }
+
+            .vault-container { padding: 0 1.5rem; margin: 3.5rem auto; }
+            .vault-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+            .video-info { padding: 1.5rem; }
+            .vault-hero { padding: 4rem 1.5rem 2rem; }
+            footer { padding: 3rem 1.5rem 1.5rem; margin-top: 5rem; }
+        }
+
+        @media (max-width: 480px) {
+            .footer-bottom { flex-direction: column; text-align: center; align-items: center; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header / Navigation Menu Ecosystem -->
+    <header>
+        <nav class="nav-container">
+            <div class="logo">Solomon Kin LLC <br><span>via REALAiID.com</span></div>
+            <button class="menu-toggle" aria-label="Toggle Menu" onclick="toggleMobileMenu()">☰</button>
+            <ul class="nav-menu" id="navMenu">
+                <li class="nav-item"><a href="/index.html" class="nav-link">Home</a></li>
+                <li class="nav-item" onclick="toggleDropdown(this, event)">
+                    <span class="nav-link">About Us ▾</span>
+                    <ul class="dropdown-menu">
+                        <li><a href="/about/profile.html">Corporate Profile & Personnel</a></li>
+                        <li><a href="/about/credentials.html">Certifications & Identifiers</a></li>
+                        <li><a href="/about/partnerships.html">Strategic Non-Profit Network</a></li>
+                    </ul>
+                </li>
+                <li class="nav-item" onclick="toggleDropdown(this, event)">
+                    <span class="nav-link">Core Divisions ▾</span>
+                    <ul class="dropdown-menu">
+                        <li><a href="/solutions/identity-forensics.html">Identity Verification & Forensics</a></li>
+                        <li><a href="/records-governance/employee-hr.html">Records Keeping & HRIS</a></li>
+                        <li><a href="/solutions/behavioral-health.html">Forensic Behavioral Tech</a></li>
+                        <li><a href="/solutions/autonomous-transport.html">Transport Safety Analytics</a></li>
+                        <li><a href="/solutions/student-loans.html">Student Financial Counseling</a></li>
+                        <li><a href="/solutions/it-cybersecurity.html">IT Systems & Cybersecurity</a></li>
+                        <li><a href="/solutions/workforce-hr.html">Workforce Supply & Compliance</a></li>
+                    </ul>
+                </li>
+                <li class="nav-item" onclick="toggleDropdown(this, event)">
+                    <span class="nav-link">Asset Leasing ▾</span>
+                    <ul class="dropdown-menu">
+                        <li><a href="/leasing/industrial-machinery.html">Heavy Machinery Rental</a></li>
+                        <li><a href="/leasing/tech-hardware.html">Technology Hardware Assets</a></li>
+                    </ul>
+                </li>
+                <li class="nav-item" onclick="toggleDropdown(this, event)">
+                    <span class="nav-link">Innovation ▾</span>
+                    <ul class="dropdown-menu">
+                        <li><a href="/projects.html">Innovation Portfolio Matrix</a></li>
+                        <li><a href="/innovation/autonomous-waze.html">Autonomous Waze Propulsion</a></li>
+                        <li><a href="/innovation/terra.html">Terra Automated Logistics</a></li>
+                    </ul>
+                </li>
+                <li class="nav-item"><a href="/media/documentary-vault.html" class="nav-link">Media Vault</a></li>
+                <li class="nav-item"><a href="/contact.html" class="nav-link">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Media Vault Hero Block -->
+    <section class="vault-hero">
+        <h1>Media &amp; Documentary Vault</h1>
+        <p>Visual verification network capturing advanced technology footprints, localized scale testing, and high-assurance telemetry recordings executed via REALM Pictures and Filthy Seduction Productions.</p>
+    </section>
+
+    <!-- Video Grid Section -->
+    <main class="vault-container">
+        <div class="vault-grid">
+            
+            <!-- Video 1: Autonomous Waze Testing -->
+            <div class="video-card">
+                <div class="video-player-frame">
+                    <span>[ Telemetry Reel: AW-01 ]</span>
+                </div>
+                <div class="video-info">
+                    <div>
+                        <div class="video-meta">File: Hydro-Propulsion Testing</div>
+                        <h2>Autonomous Waze: Sub-Surface High-Speed Run</h2>
+                        <p>Documenting the fluidic acceleration mechanics and localized telemetry loop responses of our autonomous un-crewed capsule systems operating beneath active surface draft depths.</p>
+                    </div>
+                    <div class="tech-tags">
+                        <span>Fluid Dynamics</span>
+                        <span>M2M Mesh</span>
+                        <span>M-95 Corridor</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Video 2: ARC Prototype Deployment -->
+            <div class="video-card">
+                <div class="video-player-frame">
+                    <span>[ Prototype Demonstration: ARC-26 ]</span>
+                </div>
+                <div class="video-info">
+                    <div>
+                        <div class="video-meta">File: Hardware Acquisition Verification</div>
+                        <h2>Terra Logistics: ARC Floatation &amp; Overboard Recovery</h2>
+                        <p>Operational execution testing of the Autonomous Robotic Container prototype. Showcasing automated hydrostatic sensor monitoring, emergency inflation bladders, and secure LEO satellite tracking beacons.</p>
+                    </div>
+                    <div class="tech-tags">
+                        <span>Buoyancy Arrays</span>
+                        <span>Satellite IoT</span>
+                        <span>Robotic Docking</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Video 3: Identity Verification Integrations -->
+            <div class="video-card">
+                <div class="video-player-frame">
+                    <span>[ Framework Walkthrough: ID-Zero ]</span>
+                </div>
+                <div class="video-info">
+                    <div>
+                        <div class="video-meta">File: Cryptographic Trust Architecture</div>
+                        <h2>REALAiID Platform: Air-Gapped Zero-Trust Infrastructure</h2>
+                        <p>A comprehensive technical deep dive into the hardware-bound cryptographic keyblocks securing all operational data layers, ensuring compliance and data sovereignty across distributed supply chains.</p>
+                    </div>
+                    <div class="tech-tags">
+                        <span>Zero-Trust</span>
+                        <span>Data Sovereignty</span>
+                        <span>Anti-LOGINK</span>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+    <!-- Hard Procurement Global Data Footer -->
+    <footer>
+        <div class="footer-grid">
+            <div class="footer-col">
+                <h4>Corporate Profile</h4>
+                <a href="/about/profile.html">About Solomon Kin LLC</a>
+                <a href="/about/credentials.html">Certifications & Identifiers</a>
+                <a href="/about/partnerships.html">Strategic Non-Profit Network</a>
+            </div>
+            <div class="footer-col">
+                <h4>Operating Divisions</h4>
+                <a href="/solutions/identity-forensics.html">Identity Verification & Forensics</a>
+                <a href="/records-governance/employee-hr.html">Records Keeping & HRIS</a>
+                <a href="/solutions/behavioral-health.html">Forensic Behavioral Tech</a>
+                <a href="/solutions/autonomous-transport.html">Transport Safety Analytics</a>
+                <a href="/solutions/student-loans.html">Student Financial Counseling</a>
+                <a href="/solutions/it-cybersecurity.html">IT Systems & Cybersecurity</a>
+                <a href="/solutions/workforce-hr.html">Workforce Supply & Compliance</a>
+            </div>
+            <div class="footer-col">
+                <h4>Asset Leasing</h4>
+                <a href="/leasing/industrial-machinery.html">Heavy Machinery Rental</a>
+                <a href="/leasing/tech-hardware.html">Enterprise Technology Assets</a>
+            </div>
+            <div class="footer-col">
+                <h4>Procurement & B2G</h4>
+                <a href="/procurement/capability-statement.html">View Capability Statement</a>
+                <a href="/procurement/subcontracting.html">Subcontractor Portal</a>
+                <a href="/contact.html">Submit B2G Inquiry</a>
+            </div>
+        </div>
+
+        <div class="footer-procurement-block">
+            <h4>Federal, State & Municipal Contracting Registrations</h4>
+            <p><strong>Legal Entity:</strong> Solomon Kin LLC (via REALAiID.com) &nbsp;|&nbsp; <strong>Principal Investigator / CTO:</strong> Nehemiah M. Brown</p>
+            <p><strong>Unique Entity ID (UEI):</strong> H8YDYLEK6283 &nbsp;|&nbsp; <strong>EIN:</strong> 82-4565975 &nbsp;|&nbsp; <strong>DUNS:</strong> 145053632 &nbsp;|&nbsp; <strong>SBC ID:</strong> SBC_002678850</p>
+            <p><strong>Primary NAICS Classification:</strong> 541512 (Computer Systems Design Services)</p>
+            <p><strong>Core Capabilities Mapped:</strong> Enterprise Records Governance | Human Resource Information Systems (HRIS) | Identity Trust Frameworks | Digital Forensics | Heavy Machinery Fleet Leasing</p>
+            <p><strong>System Status:</strong> Active on SAM.gov | Minority Business Enterprise (MBE) Status Verified | Regional Presence: Philadelphia, PA</p>
+        </div>
+
+        <div class="footer-bottom">
+            <p>&copy; 2026 Solomon Kin LLC. All Rights Reserved. Executive Directives executed via REALAiID.com.</p>
+            <div>
+                <a href="/privacy-policy.html">Privacy Policy</a>
+                <a href="/terms-of-service.html">Terms of Procurement</a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Logic Engine for Cross-Device Interface Click Mechanics -->
+    <script>
+        function toggleMobileMenu() {
+            var menu = document.getElementById('navMenu');
+            menu.classList.toggle('active');
+        }
+
+        function toggleDropdown(element, event) {
+            if (event.target.tagName === 'A') return;
+            
+            event.preventDefault();
+            event.stopPropagation();
+            
+            var isActive = element.classList.contains('open-active');
+            
+            document.querySelectorAll('.nav-item').forEach(function(item) {
+                item.classList.remove('open-active');
+            });
+            
+            if (!isActive) {
+                element.classList.add('open-active');
+            }
+        }
+
+        window.addEventListener('click', function(e) {
+            if (!e.target.closest('.nav-item')) {
+                document.querySelectorAll('.nav-item').forEach(function(item) {
+                    item.classList.remove('open-active');
+                });
+            }
+        });
+    </script>
+</body>
+</html>
