@@ -1,362 +1,387 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Capital Development Proposal | Spark Car Wash Midwest Expansion — Solomon Kin LLC</title>
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-  <style>
-    :root {
-      --bg-dark: #070b14;
-      --card-bg: #0f172a;
-      --accent-cyan: #00e5ff;
-      --accent-blue: #2563eb;
-      --accent-gold: #f59e0b;
-      --border-glow: rgba(0, 229, 255, 0.25);
-    }
-    body {
-      background-color: var(--bg-dark);
-      color: #ffffff !important;
-      font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, Roboto, sans-serif;
-    }
-    
-    /* ENFORCE 100% WHITE READABILITY */
-    p, span, div, label, td, th, h1, h2, h3, h4, h5, h6, input, textarea, select {
-      color: #ffffff !important;
-    }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Solomon Kin LLC — Enterprise Technology, Project Management & Records Governance</title>
+    <style>
+        /* Base Reset & Variables */
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; }
+        :root { 
+            --primary-dark: #111111; 
+            --secondary-gray: #444444; 
+            --light-gray: #f5f5f5; 
+            --border-color: #dddddd; 
+            --pure-white: #ffffff; 
+        }
+        body { background-color: var(--pure-white); color: var(--primary-dark); line-height: 1.6; -webkit-font-smoothing: antialiased; }
+        a { text-decoration: none; color: inherit; }
 
-    /* NAVBAR STYLING */
-    .custom-navbar {
-      background-color: #05080f !important;
-      border-bottom: 1px solid var(--border-glow);
-      padding: 14px 0;
-    }
-    .custom-navbar .navbar-brand {
-      color: #ffffff !important;
-      font-weight: 800;
-      letter-spacing: 1px;
-    }
-    .custom-navbar .nav-link {
-      color: #ffffff !important;
-      font-weight: 500;
-      padding: 8px 16px !important;
-      transition: color 0.2s ease;
-    }
-    .custom-navbar .nav-link:hover, .custom-navbar .dropdown-item:hover {
-      color: var(--accent-cyan) !important;
-    }
-    .dropdown-menu-dark {
-      background-color: #0f172a !important;
-      border: 1px solid var(--border-glow) !important;
-      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.6);
-    }
-    .dropdown-item {
-      color: #ffffff !important;
-      padding: 10px 18px;
-    }
+        /* Typography */
+        h1, h2, h3, h4 { font-weight: 700; color: var(--primary-dark); letter-spacing: -0.02em; }
 
-    .hero-banner {
-      background: linear-gradient(135deg, rgba(7, 11, 20, 0.95), rgba(15, 23, 42, 0.92)), 
-                  url('https://images.unsplash.com/photo-1520340356584-f9917d1eea6f?auto=format&fit=crop&w=1600&q=80') center/cover;
-      padding: 70px 0 50px 0;
-      border-bottom: 1px solid var(--border-glow);
-    }
-    
-    .badge-status {
-      background: rgba(0, 229, 255, 0.15);
-      color: var(--accent-cyan) !important;
-      border: 1px solid var(--accent-cyan);
-      padding: 6px 14px;
-      border-radius: 20px;
-      font-size: 0.85rem;
-      font-weight: 700;
-      letter-spacing: 0.5px;
-    }
+        /* Navigation Header */
+        header { width: 100%; border-bottom: 1px solid var(--border-color); background: var(--pure-white); position: sticky; top: 0; z-index: 1000; }
+        .nav-container { max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; padding: 1rem 2rem; position: relative; }
+        .logo { font-size: 1.35rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.05em; line-height: 1.2; z-index: 1001; }
+        .logo span { font-weight: 400; color: var(--secondary-gray); font-size: 0.9rem; text-transform: none; display: inline-block; }
+        
+        /* Mobile Menu Toggle Button */
+        .menu-toggle { display: none; background: none; border: none; font-size: 1.5rem; cursor: pointer; color: var(--primary-dark); z-index: 1001; padding: 0.5rem; }
 
-    .dossier-card {
-      background-color: var(--card-bg);
-      border: 1px solid rgba(255, 255, 255, 0.15);
-      border-radius: 10px;
-      padding: 26px;
-      margin-bottom: 24px;
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.45);
-    }
+        /* CSS Dropdown Menu Mechanics */
+        .nav-menu { display: flex; list-style: none; align-items: center; }
+        .nav-item { position: relative; padding: 0.5rem 1rem; }
+        .nav-link { font-size: 0.95rem; font-weight: 600; color: var(--secondary-gray); cursor: pointer; user-select: none; transition: color 0.2s; display: flex; align-items: center; gap: 0.25rem; }
+        .nav-link:hover { color: var(--primary-dark); }
+        
+        /* Interactive click-activation classes for submenus */
+        .nav-item.open-active .dropdown-menu { display: block; opacity: 1; visibility: visible; }
+        
+        .dropdown-menu { 
+            display: none; position: absolute; top: 100%; left: 0; background: var(--pure-white); 
+            border: 1px solid var(--border-color); box-shadow: 0 4px 12px rgba(0,0,0,0.05); 
+            list-style: none; min-width: 280px; padding: 0.5rem 0; margin-top: 0.5rem; border-radius: 4px;
+        }
+        .dropdown-menu li a { display: block; padding: 0.6rem 1.2rem; font-size: 0.9rem; color: var(--secondary-gray); font-weight: 500; transition: background 0.2s; }
+        .dropdown-menu li a:hover { background-color: var(--light-gray); color: var(--primary-dark); }
 
-    .metric-box {
-      background: rgba(0, 0, 0, 0.45);
-      border: 1px solid rgba(255, 255, 255, 0.15);
-      border-left: 4px solid var(--accent-cyan);
-      padding: 16px;
-      border-radius: 6px;
-    }
+        /* Hero Section */
+        .hero { max-width: 1200px; margin: 0 auto; padding: 6rem 2rem; text-align: left; border-bottom: 1px solid var(--border-color); }
+        .hero h1 { font-size: clamp(2.25rem, 5vw, 3.25rem); line-height: 1.15; margin-bottom: 1.5rem; max-width: 900px; }
+        .hero p { font-size: clamp(1.05rem, 2vw, 1.2rem); color: var(--secondary-gray); max-width: 800px; margin-bottom: 2.5rem; }
+        .cta-group { display: flex; flex-wrap: wrap; gap: 1rem; }
+        .btn { padding: 0.8rem 1.8rem; font-size: 0.95rem; font-weight: 600; border-radius: 4px; border: 1px solid var(--primary-dark); cursor: pointer; transition: all 0.2s; text-align: center; }
+        .btn-primary { background-color: var(--primary-dark); color: var(--pure-white); }
+        .btn-primary:hover { background-color: #333333; }
+        .btn-secondary { background-color: var(--pure-white); color: var(--primary-dark); }
+        .btn-secondary:hover { background-color: var(--light-gray); }
 
-    .schematic-box {
-      border: 2px dashed var(--accent-cyan);
-      background: rgba(0, 229, 255, 0.04);
-      border-radius: 8px;
-      padding: 24px;
-    }
+        /* Critical Notice Callout (Active Pipelines) */
+        .pipeline-notice { background-color: var(--light-gray); border-left: 4px solid var(--primary-dark); max-width: 1200px; margin: 3rem auto 0; padding: 1.5rem 2rem; }
+        .pipeline-notice h3 { font-size: 1.1rem; margin-bottom: 0.5rem; text-transform: uppercase; letter-spacing: 0.05em; }
+        .pipeline-notice p { font-size: 0.95rem; color: var(--secondary-gray); }
 
-    /* HIGH-CONTRAST FORM FIELDS */
-    .form-control, .form-select {
-      background-color: #080d1a !important;
-      border: 1px solid rgba(0, 229, 255, 0.4) !important;
-      color: #ffffff !important;
-      font-weight: 500;
-      padding: 10px 14px;
-    }
-    .form-control::placeholder {
-      color: #94a3b8 !important;
-    }
-    .form-control:focus, .form-select:focus {
-      background-color: #080d1a !important;
-      border-color: var(--accent-cyan) !important;
-      color: #ffffff !important;
-      box-shadow: 0 0 12px rgba(0, 229, 255, 0.4) !important;
-    }
+        /* Section Global Layout */
+        .section-container { max-width: 1200px; margin: 5rem auto; padding: 0 2rem; }
+        .section-header { font-size: 2rem; margin-bottom: 3rem; position: relative; padding-bottom: 0.5rem; }
+        .section-header::after { content: ''; position: absolute; bottom: 0; left: 0; width: 60px; height: 2px; background: var(--primary-dark); }
 
-    .btn-action {
-      background: linear-gradient(135deg, #00b4db, #0083b0);
-      color: #ffffff !important;
-      font-weight: 700;
-      letter-spacing: 0.5px;
-      border: none;
-      padding: 14px 24px;
-      border-radius: 6px;
-      transition: all 0.2s ease-in-out;
-    }
-    .btn-action:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 6px 18px rgba(0, 229, 255, 0.35);
-    }
+        /* Core Capabilities Matrix (Grid) */
+        .matrix-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 2rem; }
+        .matrix-card { border: 1px solid var(--border-color); padding: 2rem; border-radius: 4px; transition: transform 0.2s, box-shadow 0.2s; background: var(--pure-white); }
+        .matrix-card:hover { transform: translateY(-2px); box-shadow: 0 4px 12px rgba(0,0,0,0.02); }
+        .matrix-card h3 { font-size: 1.3rem; margin-bottom: 1rem; display: flex; align-items: center; flex-wrap: wrap; gap: 0.5rem; }
+        .matrix-card p { color: var(--secondary-gray); font-size: 0.95rem; margin-bottom: 1rem; }
+        .matrix-card ul { list-style: square; padding-left: 1.2rem; color: var(--secondary-gray); font-size: 0.9rem; }
+        .matrix-card ul li { margin-bottom: 0.4rem; }
 
-    .highlight-cyan {
-      color: var(--accent-cyan) !important;
-    }
-    
-    .table-dark {
-      --bs-table-bg: transparent;
-    }
-    .table-dark td, .table-dark th {
-      border-color: rgba(255, 255, 255, 0.12);
-      padding: 12px 14px;
-    }
-  </style>
+        /* Partnerships & Ecosystem Split layout */
+        .ecosystem-layout { display: flex; flex-direction: column; gap: 2rem; }
+        .ecosystem-block { border: 1px solid var(--border-color); padding: 2.5rem; border-radius: 4px; background: var(--pure-white); }
+        .ecosystem-block h3 { margin-bottom: 0.5rem; font-size: 1.4rem; }
+        .ecosystem-subtitle { font-size: 0.9rem; color: var(--secondary-gray); font-weight: 600; margin-bottom: 1rem; text-transform: uppercase; }
+        .ecosystem-block p { font-size: 1rem; color: var(--secondary-gray); margin-bottom: 1rem; }
+
+        /* Production 45-Line Global Footer */
+        footer { background-color: var(--light-gray); border-top: 1px solid var(--border-color); padding: 4rem 2rem 2rem; font-size: 0.9rem; margin-top: 8rem; }
+        .footer-grid { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 2.5rem; }
+        .footer-col h4 { font-size: 1rem; margin-bottom: 1.2rem; text-transform: uppercase; letter-spacing: 0.05em; }
+        .footer-col a { display: block; color: var(--secondary-gray); margin-bottom: 0.6rem; font-size: 0.85rem; transition: color 0.2s; }
+        .footer-col a:hover { color: var(--primary-dark); }
+        
+        .footer-procurement-block { max-width: 1200px; margin: 3rem auto 0; padding-top: 2rem; border-top: 1px solid var(--border-color); color: var(--secondary-gray); }
+        .footer-procurement-block h4 { color: var(--primary-dark); font-size: 1rem; margin-bottom: 0.8rem; text-transform: uppercase; }
+        .footer-procurement-block p { font-size: 0.85rem; margin-bottom: 0.5rem; line-height: 1.5; }
+        
+        .footer-bottom { max-width: 1200px; margin: 2rem auto 0; padding-top: 1.5rem; border-top: 1px solid var(--border-color); display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; font-size: 0.8rem; color: var(--secondary-gray); }
+        .footer-bottom div { display: flex; gap: 1rem; }
+        .footer-bottom a { text-decoration: underline; }
+
+        /* Responsive Design Rules - Desktop Boundary Optimization */
+        @media (max-width: 991px) {
+            .menu-toggle { display: block; }
+            .nav-container { padding: 1rem 1.5rem; }
+            
+            .nav-menu { 
+                display: none; position: absolute; top: 100%; left: 0; width: 100%; 
+                background: var(--pure-white); border-bottom: 1px solid var(--border-color);
+                flex-direction: column; align-items: stretch; padding: 1rem 0; max-height: 75vh; overflow-y: auto;
+            }
+            .nav-menu.active { display: flex; }
+            .nav-item { padding: 0.5rem 1.5rem; }
+            .nav-link { justify-content: space-between; padding: 0.5rem 0; width: 100%; }
+            
+            /* Mobile Accordion Override Styles */
+            .nav-item.open-active .dropdown-menu { display: block; position: static; box-shadow: none; border: none; padding-left: 1rem; width: 100%; margin-top: 0.25rem; }
+            
+            .hero { padding: 4rem 1.5rem; }
+            .pipeline-notice { margin: 2rem 1.5rem 0; padding: 1.25rem 1.5rem; }
+            .section-container { margin: 3.5rem auto; padding: 0 1.5rem; }
+            .section-header { margin-bottom: 2rem; }
+            .matrix-grid { gap: 1.5rem; }
+            .ecosystem-block { padding: 1.75rem; }
+            footer { padding: 3rem 1.5rem 1.5rem; margin-top: 5rem; }
+        }
+
+        @media (max-width: 480px) {
+            .cta-group .btn { width: 100%; }
+            .footer-bottom { flex-direction: column; text-align: center; align-items: center; }
+        }
+    </style>
 </head>
 <body>
 
-  <!-- PRIMARY NAVIGATION WITH DROPDOWN -->
-  <nav class="navbar navbar-expand-lg navbar-dark custom-navbar sticky-top">
-    <div class="container">
-      <a class="navbar-brand d-flex align-items-center gap-2" href="index.html">
-        <i class="fa-solid fa-crown highlight-cyan"></i>
-        <span>SOLOMON KIN <span class="highlight-cyan">LLC</span></span>
-      </a>
-      <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#solomonNav" aria-controls="solomonNav" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="solomonNav">
-        <ul class="navbar-nav ms-auto mb-2 mb-lg-0 align-items-lg-center">
-          <li class="nav-item">
-            <a class="nav-link" href="index.html">Home</a>
-          </li>
-          <!-- DEVELOPMENTS & PROPOSALS DROPDOWN -->
-          <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle active highlight-cyan" href="#" id="devDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-              <i class="fa-solid fa-layer-group me-1"></i> Developments & Proposals
-            </a>
-            <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="devDropdown">
-              <li><a class="dropdown-item fw-semibold" href="spark-car-wash-expansion.html"><i class="fa-solid fa-bolt highlight-cyan me-2"></i>Spark Car Wash — Midwest Expansion (MN)</a></li>
-              <li><a class="dropdown-item" href="#maritime-waterfront"><i class="fa-solid fa-anchor me-2"></i>Port of Philadelphia — Maritime Infrastructure</a></li>
-              <li><hr class="dropdown-divider border-secondary"></li>
-              <li><a class="dropdown-item text-white-50" href="#all-proposals"><i class="fa-solid fa-folder-open me-2"></i>View All Proposals</a></li>
+    <!-- Header / Navigation Menu Ecosystem -->
+    <header>
+        <nav class="nav-container">
+            <div class="logo">Solomon Kin LLC <br><span>via REALAiID.com</span></div>
+            <button class="menu-toggle" aria-label="Toggle Menu" onclick="toggleMobileMenu()">☰</button>
+            <ul class="nav-menu" id="navMenu">
+                <li class="nav-item"><a href="index.html" class="nav-link">Home</a></li>
+                <li class="nav-item" onclick="toggleDropdown(this, event)">
+                    <span class="nav-link">About Us ▾</span>
+                    <ul class="dropdown-menu">
+                        <li><a href="about/profile.html">Corporate Profile & Personnel</a></li>
+                        <li><a href="about/credentials.html">Certifications & Identifiers</a></li>
+                        <li><a href="about/partnerships.html">Strategic Non-Profit Network</a></li>
+                    </ul>
+                </li>
+                <li class="nav-item" onclick="toggleDropdown(this, event)">
+                    <span class="nav-link">Core Divisions ▾</span>
+                    <ul class="dropdown-menu">
+                        <li><a href="solutions/identity-forensics.html">High-Assurance IDV & Forensics</a></li>
+                        <li><a href="records-governance/employee-hr.html">Records Keeping & HR Information Systems</a></li>
+                        <li><a href="solutions/behavioral-health.html">Forensic Behavioral Health Tech</a></li>
+                        <li><a href="solutions/autonomous-transport.html">Transport Safety Analytics</a></li>
+                        <li><a href="solutions/student-loans.html">Student Financial Counseling</a></li>
+                        <li><a href="solutions/it-cybersecurity.html">IT Systems & Cybersecurity</a></li>
+                        <li><a href="solutions/workforce-hr.html">Workforce Supply & Compliance</a></li>
+                    </ul>
+                </li>
+                <li class="nav-item" onclick="toggleDropdown(this, event)">
+                    <span class="nav-link">Asset Leasing ▾</span>
+                    <ul class="dropdown-menu">
+                        <li><a href="leasing/industrial-machinery.html">Heavy Machinery Rental</a></li>
+                        <li><a href="leasing/tech-hardware.html">Technology Hardware Assets</a></li>
+                    </ul>
+                </li>
+                <li class="nav-item" onclick="toggleDropdown(this, event)">
+                    <span class="nav-link">Innovation ▾</span>
+                    <ul class="dropdown-menu">
+                        <li><a href="innovation/projects.html">Innovation Portfolio Matrix</a></li>
+                        <li><a href="innovation/autonomous-waze.html">Autonomous Waze Propulsion</a></li>
+                        <li><a href="innovation/terra.html">Terra Automated Logistics</a></li>
+                    </ul>
+                </li>
+                <li class="nav-item" onclick="toggleDropdown(this, event)">
+                    <span class="nav-link">Development ▾</span>
+                    <ul class="dropdown-menu">
+                        <li><a href="spark-car-wash-expansion.html">Spark Car Wash Expansion</a></li>
+                    </ul>
+                </li>
+                <li class="nav-item" onclick="toggleDropdown(this, event)">
+                    <span class="nav-link">Media ▾</span>
+                    <ul class="dropdown-menu">
+                        <li><a href="media/documentary-vault.html">Media Vault</a></li>
+                        <li><a href="media/press-kit.html">Electronic Press Kit</a></li>
+                        <li><a href="media/terra-simulation.html">TERRA Live Simulation</a></li>
+                    </ul>
+                </li>
+                <li class="nav-item" onclick="toggleDropdown(this, event)">
+                    <span class="nav-link">Procurement ▾</span>
+                    <ul class="dropdown-menu">
+                        <li><a href="procurement/capability-statement.html">Capability Statement</a></li>
+                        <li><a href="procurement/subcontracting.html">Subcontractor Portal Intake</a></li>
+                    </ul>
+                </li>
+                <li class="nav-item"><a href="contact.html" class="nav-link">Contact</a></li>
             </ul>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#contact">Contact</a>
-          </li>
-        </ul>
-      </div>
+        </nav>
+    </header>
+
+    <!-- Main Hero Hook Frame -->
+    <main class="hero">
+        <h1>High-Assurance Technology, Enterprise Records Keeping, and Full-Spectrum Project Management.</h1>
+        <p>Solomon Kin LLC is an active SAM.gov registered, minority-owned small business enterprise. We combine advanced cryptographic identity and enterprise data governance with agile field operations, specialized social services personnel, and cross-industry subcontractor management.</p>
+        <div class="cta-group">
+            <a href="procurement/capability-statement.html" class="btn btn-primary">View Core Capabilities</a>
+            <a href="contact.html" class="btn btn-secondary">Submit Procurement Inquiry</a>
+        </div>
+    </main>
+
+    <!-- Active Bids Pipeline Tracking Banner -->
+    <div class="pipeline-notice">
+        <h3>📢 Active Strategic Frameworks & Subcontractor Opportunities</h3>
+        <p>Solomon Kin LLC is currently building out specialized operational matrices for current municipal, state, and federal solicitations including: <strong>RFP #21260602084904</strong> (Forensic Behavioral Health Platforms), <strong>Topic 26-OS1</strong> (Autonomous Transport Predictive Safety), and <strong>Opportunity #21260612171032</strong> (Student Loan Counseling Operations). Qualified subcontractors are encouraged to submit credentials via our procurement gateway.</p>
     </div>
-  </nav>
 
-  <!-- HERO HEADER -->
-  <header class="hero-banner">
-    <div class="container">
-      <div class="d-flex align-items-center gap-2 mb-3">
-        <span class="badge-status"><i class="fa-solid fa-bolt me-1"></i> ACTIVE MASTER PROPOSAL</span>
-        <span class="badge bg-primary fw-bold">REF: SK-DEV-2026-MN01</span>
-      </div>
-      <h1 class="display-5 fw-bold text-white mb-2">Commercial Pad Redevelopment & Regional Expansion</h1>
-      <p class="fs-5 text-white col-lg-10 mb-4">
-        Turnkey development package and strategic beachhead proposition for <span class="highlight-cyan fw-bold">Spark Car Wash</span> expansion into the Minneapolis–St. Paul metropolitan corridor.
-      </p>
-      <div class="row g-3 text-white fw-medium border-top border-secondary pt-3 mt-2">
-        <div class="col-md-4"><i class="fa-solid fa-user-tie highlight-cyan me-2"></i><strong>Acquisitions Director:</strong> Michael Brown</div>
-        <div class="col-md-4"><i class="fa-solid fa-building highlight-cyan me-2"></i><strong>Entity:</strong> Solomon Kin LLC (Acquisitions Desk)</div>
-        <div class="col-md-4"><i class="fa-solid fa-map-location-dot highlight-cyan me-2"></i><strong>Target Submarket:</strong> Bloomington, MN</div>
-      </div>
-    </div>
-  </header>
+    <!-- Operating Matrix Grid Section -->
+    <section class="section-container">
+        <h2 class="section-header">Our Operating Divisions</h2>
+        <div class="matrix-grid">
+            
+            <div class="matrix-card">
+                <h3>🔒 High-Assurance Identity &amp; Forensics</h3>
+                <p>Advanced digital architecture ensuring absolute data trust, asset validation, and secure system loops.</p>
+                <ul>
+                    <li>Biometric digital identity verification (IDV) frameworks</li>
+                    <li>Cryptographic content provenance and secure ledger vaults</li>
+                    <li>Digital forensics and systems infrastructure auditing</li>
+                </ul>
+            </div>
 
-  <!-- MAIN DOSSIER CONTENT -->
-  <main class="container my-5">
-    <div class="row g-4">
-      
-      <!-- LEFT COLUMN: PROPOSAL DATA & SCHEMATICS -->
-      <div class="col-lg-8">
-        
-        <!-- PROJECT SUMMARY -->
-        <div class="dossier-card">
-          <h3 class="highlight-cyan mb-3 fs-4"><i class="fa-solid fa-chart-line me-2"></i>Executive Proposition</h3>
-          <p class="text-white lead fs-6">
-            Solomon Kin LLC presents a commercial pad acquisition and express conveyor conversion opportunity located along the retail and commuter artery of Bloomington, Minnesota. This project provides Spark Car Wash with an immediate, de-risked beachhead into the snowbelt Midwest corridor—capitalizing on high-frequency winter wash subscription economics driven by continuous state road salt usage and arterial commuter density.
-          </p>
-          <div class="row g-3 mt-3">
-            <div class="col-md-4">
-              <div class="metric-box">
-                <div class="text-white small fw-bold text-uppercase">Daily Traffic Count</div>
-                <div class="h4 fw-bold highlight-cyan mb-1">24,000+ VPD</div>
-                <div class="small text-white">Direct I-35W Feeder Route</div>
-              </div>
+            <div class="matrix-card">
+                <h3>📁 Enterprise Records &amp; HR Systems</h3>
+                <p>Systemic data governance models specializing in high-security employee rosters, compliance tracking, and permanent records maintenance.</p>
+                <ul>
+                    <li>Corporate document lifecycle tracking &amp; regulatory archiving</li>
+                    <li>Protected background checks and personnel credential vaulting</li>
+                    <li>Secure HRIS compliance modules for prime-sub data integrity</li>
+                </ul>
             </div>
-            <div class="col-md-4">
-              <div class="metric-box">
-                <div class="text-white small fw-bold text-uppercase">Target Parcel Area</div>
-                <div class="h4 fw-bold highlight-cyan mb-1">0.96 Acres</div>
-                <div class="small text-white">41,651 Total Sq. Ft.</div>
-              </div>
+
+            <div class="matrix-card">
+                <h3>👥 Social Services &amp; Workforce Supply</h3>
+                <p>On-demand mobilization of trained professionals equipped with secure tech layer configurations.</p>
+                <ul>
+                    <li>Case management and public human services deployment</li>
+                    <li>Bursar, higher-ed financial operations, and counseling frameworks</li>
+                    <li>Rigorous personnel compliance and labor rights training</li>
+                </ul>
             </div>
-            <div class="col-md-4">
-              <div class="metric-box">
-                <div class="text-white small fw-bold text-uppercase">Utility Status</div>
-                <div class="h4 fw-bold highlight-cyan mb-1">Heavy Commercial</div>
-                <div class="small text-white">Water, Sewer & 3-Phase</div>
-              </div>
+
+            <div class="matrix-card">
+                <h3>🏗️ Project Management &amp; Machinery Leasing</h3>
+                <p>Turnkey master project execution combining heavy machinery tracking and agile subcontractor scaling.</p>
+                <ul>
+                    <li>Single point of contact lifecycle contract management</li>
+                    <li>Heavy industrial and technical construction equipment fleet leasing</li>
+                    <li>Rapid onboarding frameworks for targeted technical personnel</li>
+                </ul>
             </div>
-          </div>
+
+        </div>
+    </section>
+
+    <!-- Integrated Non-Profit Ecosystem Matrix -->
+    <section class="section-container">
+        <h2 class="section-header">Strategic Non-Profit Ecosystem</h2>
+        <div class="ecosystem-layout">
+            
+            <div class="ecosystem-block">
+                <h3>Thin Black and Brown Lines USA (tbblusa.org)</h3>
+                <div class="ecosystem-subtitle">Operations &amp; Technology Partner</div>
+                <p>Solomon Kin LLC operates in lockstep alignment with TBBLUSA to deliver cross-industry technology personnel and execute public assistance frameworks. We serve as the dedicated Technology and Operations Partner supporting high-volume counseling pipelines and community-facing operations, including joint development frameworks under <strong>Opportunity #21260612171032</strong> (Student Loan Counseling Services).</p>
+            </div>
+
+            <div class="ecosystem-block">
+                <h3>Koinonia Grace Foundation</h3>
+                <div class="ecosystem-subtitle">Forensic Evaluation &amp; Platform Architecture Partner</div>
+                <p>Working hand-in-hand to build out secure, cryptographic database environments for vulnerable systems. Our collaboration focuses directly on establishing the structural blueprint for <strong>RFP #21260602084904</strong> (Human Services - Child Welfare and Juvenile Justice Services), delivering AI-enhanced secure tracking systems and forensic behavioral health data loops.</p>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Hard Procurement Global Data Footer -->
+    <footer>
+        <div class="footer-grid">
+            <div class="footer-col">
+                <h4>Corporate Profile</h4>
+                <a href="about/profile.html">About Solomon Kin LLC</a>
+                <a href="about/credentials.html">Certifications &amp; Identifiers</a>
+                <a href="about/partnerships.html">Strategic Non-Profit Network</a>
+            </div>
+            <div class="footer-col">
+                <h4>Operating Divisions</h4>
+                <a href="solutions/identity-forensics.html">Identity Verification &amp; Forensics</a>
+                <a href="records-governance/employee-hr.html">Records Keeping &amp; HRIS</a>
+                <a href="solutions/behavioral-health.html">Forensic Behavioral Tech</a>
+                <a href="solutions/autonomous-transport.html">Transport Safety Analytics</a>
+                <a href="solutions/student-loans.html">Student Financial Counseling</a>
+                <a href="solutions/it-cybersecurity.html">IT Systems &amp; Cybersecurity</a>
+                <a href="solutions/workforce-hr.html">Workforce Supply &amp; Compliance</a>
+            </div>
+            <div class="footer-col">
+                <h4>Asset Leasing</h4>
+                <a href="leasing/industrial-machinery.html">Heavy Machinery Rental</a>
+                <a href="leasing/tech-hardware.html">Technology Hardware Assets</a>
+            </div>
+            <div class="footer-col">
+                <h4>Innovation &amp; Media</h4>
+                <a href="innovation/projects.html">Innovation Portfolio Matrix</a>
+                <a href="innovation/autonomous-waze.html">Autonomous Waze Propulsion</a>
+                <a href="innovation/terra.html">Terra Automated Logistics</a>
+                <a href="media/documentary-vault.html">Media Documentary Vault</a>
+                <a href="media/press-kit.html">Electronic Press Kit (EPK)</a>
+                <a href="media/terra-simulation.html">TERRA Live Simulation</a>
+            </div>
+            <div class="footer-col">
+                <h4>Procurement &amp; B2G</h4>
+                <a href="procurement/capability-statement.html">View Capability Statement</a>
+                <a href="procurement/subcontracting.html">Subcontractor Portal</a>
+                <a href="contact.html">Submit B2G Inquiry</a>
+            </div>
         </div>
 
-        <!-- PROPERTY SPECIFICATIONS TABLE -->
-        <div class="dossier-card">
-          <h3 class="highlight-cyan mb-3 fs-4"><i class="fa-solid fa-ruler-combined me-2"></i>Site Technical Specifications</h3>
-          <div class="table-responsive">
-            <table class="table table-dark table-striped mb-0 align-middle">
-              <tbody>
-                <tr>
-                  <td class="text-white fw-bold" style="width: 35%;">Site Location</td>
-                  <td class="text-white">9329 Lyndale Ave S, Bloomington, MN 55420</td>
-                </tr>
-                <tr>
-                  <td class="text-white fw-bold">County Parcel ID (PID)</td>
-                  <td><code class="highlight-cyan fw-bold fs-6">10-027-24-33-0020</code> (Hennepin County)</td>
-                </tr>
-                <tr>
-                  <td class="text-white fw-bold">Current Zoning</td>
-                  <td><span class="badge bg-success fs-6">Commercial-Preferred / B-2</span> (Auto Service Compatible)</td>
-                </tr>
-                <tr>
-                  <td class="text-white fw-bold">Parcel Dimensions</td>
-                  <td class="text-white">Conforming Pad (&gt;120' Frontage &times; 300'+ Depth)</td>
-                </tr>
-                <tr>
-                  <td class="text-white fw-bold">Site Disposition Status</td>
-                  <td class="text-white">Vacant Restaurant Footprint / Surface Lot (David Fong's Disposition)</td>
-                </tr>
-                <tr>
-                  <td class="text-white fw-bold">Competitive Buffer</td>
-                  <td class="text-white">&gt; 3.0-Mile Protected Radial Envelope from Major Express Tunnels</td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
+        <div class="footer-procurement-block">
+            <h4>Federal, State &amp; Municipal Contracting Registrations</h4>
+            <p><strong>Legal Entity:</strong> Solomon Kin LLC (via REALAiID.com) &nbsp;|&nbsp; <strong>Principal Investigator / CTO:</strong> Nehemiah M. Brown</p>
+            <p><strong>Unique Entity ID (UEI):</strong> H8YDYLEK6283 &nbsp;|&nbsp; <strong>EIN:</strong> 82-4565975 &nbsp;|&nbsp; <strong>DUNS:</strong> 145053632 &nbsp;|&nbsp; <strong>SBC ID:</strong> SBC_002678850</p>
+            <p><strong>Primary NAICS Classification:</strong> 541512 (Computer Systems Design Services)</p>
+            <p><strong>Core Capabilities Mapped:</strong> Enterprise Records Governance | Human Resource Information Systems (HRIS) | Identity Trust Frameworks | Digital Forensics | Heavy Machinery Fleet Leasing</p>
+            <p><strong>System Status:</strong> Active on SAM.gov | Minority Business Enterprise (MBE) Status Verified | Regional Presence: Philadelphia, PA</p>
         </div>
 
-        <!-- SITE SCHEMATIC & FLOW ARCHITECTURE -->
-        <div class="dossier-card">
-          <h3 class="highlight-cyan mb-3 fs-4"><i class="fa-solid fa-diagram-project me-2"></i>Conveyor Tunnel & Logistics Schematic</h3>
-          <div class="schematic-box mb-3 text-center">
-            <i class="fa-solid fa-arrows-split-up-and-left fa-2x highlight-cyan mb-2"></i>
-            <h5 class="fw-bold text-white">EXPRESS CONVEYOR SITE LOGISTICS LAYOUT</h5>
-            <p class="text-white small mb-3">Conforming Multi-Lane Stacking, Dual Pay Stations, 120' Wash Tunnel & Vacuum Stalls</p>
-            <div class="bg-black p-3 rounded text-start font-monospace small text-white border border-info">
-              [Lyndale Ave S Ingress] ──&gt; [Dual Stacking Queue / RFID Automation] ──&gt;<br>
-              └──&gt; [120' High-Throughput Wash Tunnel] ──&gt; [Dual-Sided Vacuum Canopy Stalls] ──&gt;<br>
-              └──&gt; [Controlled Egress to 93rd St / Signalized Commuter Return]
+        <div class="footer-bottom">
+            <p>&copy; 2026 Solomon Kin LLC. All Rights Reserved. Executive Directives executed via REALAiID.com. Supplier Vendor Number
+0000571212 - 1880 John F Kennedy Blvd, Ste 104, Philadelphia, PA 19103
+
+solomonkinllc@gmail.com
+</p>
+            <div>
+                <a href="privacy-policy.html">Privacy Policy</a>
+                <a href="terms-of-service.html">Terms of Procurement</a>
             </div>
-          </div>
-          <p class="text-white small mb-0">
-            * Site envelope accommodates Spark's standard operational infrastructure: 2" dedicated water main service, 6" sanitary sewer tap, and 800-AMP electrical paneling.
-          </p>
         </div>
+    </footer>
 
-      </div>
+    <!-- Logic Engine for Cross-Device Interface Click Mechanics -->
+    <script>
+        function toggleMobileMenu() {
+            var menu = document.getElementById('navMenu');
+            menu.classList.toggle('active');
+        }
 
-      <!-- RIGHT COLUMN: CONTACT & INQUIRY FORM -->
-      <div class="col-lg-4">
-        
-        <!-- PRINCIPAL CONTACT CARD -->
-        <div class="dossier-card">
-          <h4 class="highlight-cyan mb-3 fs-5"><i class="fa-solid fa-id-badge me-2"></i>Project Leadership</h4>
-          <div class="mb-3">
-            <div class="fw-bold fs-5 text-white">Michael Brown</div>
-            <div class="text-white small">Managing Director | Commercial Acquisitions</div>
-            <div class="highlight-cyan fw-bold small">Solomon Kin LLC</div>
-          </div>
-          <hr class="border-secondary">
-          <div class="text-white small mb-2">
-            <i class="fa-solid fa-envelope highlight-cyan me-2"></i> solomonkinllc@gmail.com
-          </div>
-          <div class="text-white small mb-3">
-            <i class="fa-solid fa-shield-halved highlight-cyan me-2"></i> PA Registered Entity | Nationwide Asset Sourcing
-          </div>
-        </div>
+        function toggleDropdown(element, event) {
+            // Check if the click event originated directly inside a link within the dropdown menu
+            if (event.target.tagName === 'A') return;
+            
+            event.preventDefault();
+            event.stopPropagation();
+            
+            var isActive = element.classList.contains('open-active');
+            
+            // Close all active sibling dropdowns across both viewports
+            document.querySelectorAll('.nav-item').forEach(function(item) {
+                item.classList.remove('open-active');
+            });
+            
+            // If the element clicked wasn't already active, open it
+            if (!isActive) {
+                element.classList.add('open-active');
+            }
+        }
 
-        <!-- SECURE PROPOSAL INQUIRY FORM -->
-        <div class="dossier-card" id="contact">
-          <h4 class="highlight-cyan mb-3 fs-5"><i class="fa-solid fa-file-signature me-2"></i>Inquire on this Proposal</h4>
-          <form action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
-            <input type="hidden" name="_subject" value="Commercial Proposal Inquiry: Spark MN Site 01">
-            
-            <div class="mb-3">
-              <label class="form-label text-white fw-bold small">Full Name</label>
-              <input type="text" name="name" class="form-control" placeholder="Executive / Broker Name" required>
-            </div>
-            
-            <div class="mb-3">
-              <label class="form-label text-white fw-bold small">Organization / Entity</label>
-              <input type="text" name="organization" class="form-control" placeholder="e.g., Spark Real Estate Team" required>
-            </div>
-            
-            <div class="mb-3">
-              <label class="form-label text-white fw-bold small">Corporate Email</label>
-              <input type="email" name="email" class="form-control" placeholder="corporate@domain.com" required>
-            </div>
-            
-            <div class="mb-3">
-              <label class="form-label text-white fw-bold small">Inquiry Nature</label>
-              <select name="inquiry_type" class="form-select">
-                <option value="Contract Assignment">Contract / Option Assignment</option>
-                <option value="Site Data Room Access">Request Full GIS & Utility Data Room</option>
-                <option value="Joint Development">Joint Venture / Ground Lease Terms</option>
-              </select>
-            </div>
-            
-            <div class="mb-3">
-              <label class="form-label text-white fw-bold small">Message / NDA Request</label>
-              <textarea name="message" class="form-control" rows="3" placeholder="Provide acquisition guidelines or data room access requests..."></textarea>
-            </div>
-            
-            <button type="submit" class="btn btn-action w-100"><i class="fa-solid fa-paper-plane me-2"></i>Transmit to Michael Brown</button>
-          </form>
-        </div>
-
-      </div>
-    </div>
-  </main>
-
-  <!-- BOOTSTRAP JS -->
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+        // Global Event Listener: Closes open submenus if a user clicks outside the header bounding box on Desktop
+        window.addEventListener('click', function(e) {
+            if (!e.target.closest('.nav-item')) {
+                document.querySelectorAll('.nav-item').forEach(function(item) {
+                    item.classList.remove('open-active');
+                });
+            }
+        });
+    </script>
 </body>
 </html>
