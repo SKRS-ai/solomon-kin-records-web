@@ -22,19 +22,32 @@
             }
         }
     </script>
+    <style>
+        .logo-hover-glow {
+            transition: all 0.3s ease-in-out;
+        }
+        .logo-hover-glow:hover {
+            transform: scale(1.05);
+            filter: drop-shadow(0 0 15px rgba(217, 119, 6, 0.6));
+        }
+    </style>
 </head>
 <body class="bg-solomon-dark text-gray-100 font-sans antialiased selection:bg-blue-500 selection:text-white">
 
     <!-- Header / Navigation -->
-    <header class="sticky top-0 z-50 bg-solomon-dark/90 backdrop-blur-md border-b border-gray-800">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
-            <div class="flex items-center space-x-3">
-                <div class="bg-blue-600 text-white font-black px-3 py-2 rounded text-xl tracking-wider">CT</div>
-                <div>
-                    <span class="block font-bold text-lg tracking-tight">Cedar Temple Security Patrol</span>
-                    <span class="block text-xs text-blue-400 font-mono">Solomon Kin LLC Enterprise</span>
+    <header class="sticky top-0 z-50 bg-solomon-dark/95 backdrop-blur-md border-b border-gray-800 shadow-xl">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-24 flex items-center justify-between">
+            <!-- Centered Prominent Logo -->
+            <div class="flex items-center space-x-4">
+                <a href="#" class="block logo-hover-glow">
+                    <img src="cp.jpg" alt="Cedar Temple Security Patrol Logo" class="h-20 w-auto object-contain rounded-lg border border-amber-500/30 bg-black p-1 shadow-lg shadow-amber-900/20">
+                </a>
+                <div class="hidden sm:block">
+                    <span class="block font-black text-lg tracking-wider text-amber-500 uppercase">Cedar Temple</span>
+                    <span class="block text-xs text-gray-400 font-mono tracking-tight">Security Patrol LLC | Solomon Kin Enterprise</span>
                 </div>
             </div>
+            
             <nav class="hidden md:flex items-center space-x-8 text-sm font-medium">
                 <a href="#overview" class="hover:text-blue-400 transition">Overview</a>
                 <a href="#markets" class="hover:text-blue-400 transition">Target Markets</a>
@@ -264,7 +277,7 @@
     <footer class="bg-gray-950 border-t border-gray-800 py-12">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row items-center justify-between text-xs text-gray-500 font-mono space-y-4 md:space-y-0">
             <div>
-                &copy; 2026 Solomon Kin LLC d/b/a Cedar Temple Security Patrol. All Rights Reserved.
+                © 2026 Solomon Kin LLC d/b/a Cedar Temple Security Patrol. All Rights Reserved.
             </div>
             <div>
                 UEI: H8YDYLEK6283 | CAGE: 82-4565975 | Philadelphia, PA
