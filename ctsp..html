@@ -27,27 +27,23 @@
             transition: all 0.3s ease-in-out;
         }
         .logo-hover-glow:hover {
-            transform: scale(1.05);
-            filter: drop-shadow(0 0 15px rgba(217, 119, 6, 0.6));
+            transform: scale(1.03);
+            filter: drop-shadow(0 0 20px rgba(217, 119, 6, 0.5));
         }
     </style>
 </head>
 <body class="bg-solomon-dark text-gray-100 font-sans antialiased selection:bg-blue-500 selection:text-white">
 
-    <!-- Header / Navigation -->
-    <header class="sticky top-0 z-50 bg-solomon-dark/95 backdrop-blur-md border-b border-gray-800 shadow-xl">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-24 flex items-center justify-between">
-            <!-- Centered Prominent Logo -->
-            <div class="flex items-center space-x-4">
-                <a href="#" class="block logo-hover-glow">
-                    <img src="cp.jpg" alt="Cedar Temple Security Patrol Logo" class="h-20 w-auto object-contain rounded-lg border border-amber-500/30 bg-black p-1 shadow-lg shadow-amber-900/20">
-                </a>
-                <div class="hidden sm:block">
-                    <span class="block font-black text-lg tracking-wider text-amber-500 uppercase">Cedar Temple</span>
-                    <span class="block text-xs text-gray-400 font-mono tracking-tight">Security Patrol LLC | Solomon Kin Enterprise</span>
+    <!-- Header / Navigation (Restored to original clean state) -->
+    <header class="sticky top-0 z-50 bg-solomon-dark/90 backdrop-blur-md border-b border-gray-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+            <div class="flex items-center space-x-3">
+                <div class="bg-blue-600 text-white font-black px-3 py-2 rounded text-xl tracking-wider">CT</div>
+                <div>
+                    <span class="block font-bold text-lg tracking-tight">Cedar Temple Security Patrol</span>
+                    <span class="block text-xs text-blue-400 font-mono">Solomon Kin LLC Enterprise</span>
                 </div>
             </div>
-            
             <nav class="hidden md:flex items-center space-x-8 text-sm font-medium">
                 <a href="#overview" class="hover:text-blue-400 transition">Overview</a>
                 <a href="#markets" class="hover:text-blue-400 transition">Target Markets</a>
@@ -63,24 +59,34 @@
         </div>
     </header>
 
-    <!-- Hero Section -->
+    <!-- Hero Section with Logo Positioned Top-Right Next to Header Text -->
     <section class="relative overflow-hidden py-20 lg:py-32 border-b border-gray-800">
         <div class="absolute inset-0 bg-[radial-gradient(circle_at_top_right,_var(--tw-gradient-stops))] from-blue-900/20 via-transparent to-transparent pointer-events-none"></div>
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-            <div class="max-w-3xl">
-                <span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-mono font-medium bg-blue-900/50 text-blue-300 border border-blue-700/50 mb-6">
-                    [PA PRIVATE DETECTIVE LICENSED | PHILA. CAPI & CAL VERIFIED]
-                </span>
-                <h1 class="text-4xl sm:text-6xl font-black tracking-tight leading-tight mb-6">
-                    Elite Mobile Patrol & <span class="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-indigo-300">Asset Protection Systems</span>
-                </h1>
-                <p class="text-lg sm:text-xl text-gray-300 mb-8 leading-relaxed">
-                    Cedar Temple Security Patrol delivers high-visibility physical deterrence, rigorous officer patrols, and intelligent automated security infrastructure across the Greater Philadelphia commercial corridor.
-                </p>
-                <div class="flex flex-wrap gap-4 text-xs font-mono text-gray-400">
-                    <span class="bg-gray-900 px-3 py-1.5 rounded border border-gray-800">UEI: H8YDYLEK6283</span>
-                    <span class="bg-gray-900 px-3 py-1.5 rounded border border-gray-800">CAGE: 82-4565975</span>
-                    <span class="bg-gray-900 px-3 py-1.5 rounded border border-gray-800">Vehicle: 2021 Ford Bronco Patrol Fleet</span>
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+                <!-- Left Text Content -->
+                <div class="lg:col-span-7">
+                    <span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-mono font-medium bg-blue-900/50 text-blue-300 border border-blue-700/50 mb-6">
+                        [PA PRIVATE DETECTIVE LICENSED | PHILA. CAPI & CAL VERIFIED]
+                    </span>
+                    <h1 class="text-4xl sm:text-6xl font-black tracking-tight leading-tight mb-6">
+                        Elite Mobile Patrol & <span class="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-indigo-300">Asset Protection Systems</span>
+                    </h1>
+                    <p class="text-lg sm:text-xl text-gray-300 mb-8 leading-relaxed">
+                        Cedar Temple Security Patrol delivers high-visibility physical deterrence, rigorous officer patrols, and intelligent automated security infrastructure across the Greater Philadelphia commercial corridor.
+                    </p>
+                    <div class="flex flex-wrap gap-4 text-xs font-mono text-gray-400">
+                        <span class="bg-gray-900 px-3 py-1.5 rounded border border-gray-800">UEI: H8YDYLEK6283</span>
+                        <span class="bg-gray-900 px-3 py-1.5 rounded border border-gray-800">CAGE: 82-4565975</span>
+                        <span class="bg-gray-900 px-3 py-1.5 rounded border border-gray-800">Vehicle: 2021 Ford Bronco Patrol Fleet</span>
+                    </div>
+                </div>
+
+                <!-- Right Prominent Logo Display (cp.png) with Hover Glow -->
+                <div class="lg:col-span-5 flex justify-center">
+                    <div class="relative p-4 bg-gray-950/80 rounded-2xl border border-amber-500/40 shadow-2xl shadow-amber-950/50 logo-hover-glow">
+                        <img src="cp.png" alt="Cedar Temple Security Patrol Logo" class="w-full max-w-md h-auto object-contain rounded-xl">
+                    </div>
                 </div>
             </div>
         </div>
